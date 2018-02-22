@@ -18,30 +18,6 @@ int	send_op(int fd, t_op ope, char **instruc)
 	}
 }
 
-void	write_op(t_op ope, int fd, char **instruc)
-{
-	int	i = send_op(fd, ope, instruc);
-	int	j;
-	int	k;
-	int	x = -1;
-
-	if (i == 4) {
-		k = my_strlen(instruc[1]);
-		write(fd, &i, 1);
-		write(fd, &k, 4);
-		while (++x < my_strlen(instruc[1])) {
-			j = instruc[1][x];
-			write(fd, &j, 1);
-		}
-		return;
-	}
-	j = my_getnbr(instruc[1]);
-	k = my_getnbr(instruc[2]);
-	write(fd, &i, 1);
-	write(fd, &j, 4);
-	write(fd, &k, 4);
-}
-
 int	init_struct(t_op *ope)
 {
 	if (init_op(ope) == 84)
@@ -50,7 +26,24 @@ int	init_struct(t_op *ope)
 		return (84);
 	if (init_arg(ope) == 84)
 		return (84);
+	ope->isempty = 0;
 }
+
+char	**check_label(char **save, t_op ope)
+{
+	int i = -1;
+	int j = -1;
+
+	
+	while (ope.isempty == 1 && ope.check_lab[++i] != NULL) {
+		while (ope.label[++j] != NULL && my_strcmp(ope.label[j], ope.check_lab[i]) != 0);
+		if (ope.label[j] == NULL)
+			return (NULL);
+		j = -1;
+	}
+	return (save);
+}
+
 char	**parseur(char *str, char *str2, int j, char *s)
 {
 	int fd2 = open(str, O_RDONLY);
@@ -64,7 +57,7 @@ char	**parseur(char *str, char *str2, int j, char *s)
 	while ((s = get_next_line(fd2))) {
 		if (s[0] != '\0' && (instruc = my_str_to_word_array(s)) == NULL)
 			return (NULL);
-		if (s[0] != '\0' && instruc[0] != NULL && check_error(ope, instruc) == 84)
+		if (s[0] != '\0' && instruc[0] != NULL && check_error(&ope, instruc) == 84)
 			return (NULL);
 		else if (s[0] != '\0' && instruc[0] != NULL) {
 			save[j++] = my_strdup(s);
@@ -72,5 +65,5 @@ char	**parseur(char *str, char *str2, int j, char *s)
 		}
 	}
 	save[j] = NULL;
-	return (save);
+	return (check_label(save, ope));
 }

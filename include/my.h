@@ -18,6 +18,10 @@ typedef	struct	s_op {
 	char	**arg;
 	int	*ac;
 	char	**tab;
+	char **label;
+	char **check_lab;
+	int isempty;
+	
 } t_op;
 
 /*UTILITY.C*/
@@ -37,11 +41,11 @@ int	init_arg(t_op *);
 char	**check_header(int fd, char **save, int check);
 
 /*ERROR.C*/
-int	check_name(t_op, char **);
-int	check_ac(t_op, char **, int);
-int	check_error(t_op, char **);
-int	check_param(char *);
-int	check_arg(t_op, int, char, char *);
+int	check_name(t_op*, char **, int, int);
+int	check_ac(t_op*, char **, int, int);
+int	check_error(t_op*, char **);
+int	check_param(char *, t_op*);
+int	check_arg(t_op*, int, char, char *);
 
 /*MY_STR_TO_WORD_ARRAY.C*/
 char	**my_str_to_word_array(char *str);

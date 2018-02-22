@@ -7,18 +7,52 @@
 
 #include "../include/my.h"
 
-int	check_name(t_op ope, char **instruct)
+int	check_name(t_op *ope, char **instruct, int bool, int i)
 {
-	int	i = -1;
+	static int o = 2;
+	static int j = -1;
 
-	while (ope.tab[++i] != NULL) {
-		if (my_strcmp(instruct[0], ope.tab[i]) == 0)
+	ope->label = j == -1 ? malloc(sizeof(char*) * o) : ope->label;
+	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR) {
+		ope->label = realloc(ope->label, sizeof(char *) * o++);
+		ope->label[++j] = malloc(sizeof(char) * my_strlen(instruct[0]));
+		if (ope->label[j] == NULL)
+			return (84);
+		ope->label[j][0] = '\0';
+		ope->label[j] = my_strdup(instruct[0]);
+		ope->label[j][my_strlen(instruct[0]) - 1] = '\0';
+		bool = 1;
+	}
+	ope->label[j + 1] = NULL;
+	while (ope->tab[++i] != NULL) {
+		if (my_strcmp(instruct[bool], ope->tab[i]) == 0)
 			return (i);
 	}
 	return (84);
 }
 
-int	check_param(char *param)
+int	put_label(t_op *ope, char *param)
+{
+	static int i = 2;
+	static int j = -1;
+	int o = 1;
+
+	if (j == -1)
+		ope->check_lab = malloc(sizeof(char*) * i++);
+	else
+		ope->check_lab = realloc(ope->check_lab, sizeof(char*) * i++);
+	ope->check_lab[++j] = malloc(sizeof(char) * my_strlen(param) - 1);
+	if (ope->check_lab[j] == NULL)
+		return (84);
+	while (param[++o] != '\0')
+		ope->check_lab[j][o - 2] = param[o];
+	ope->check_lab[j][o - 2] = '\0';
+	ope->check_lab[j + 1] = NULL;
+	ope->isempty = 1;
+	return (1);
+}
+
+int	check_param(char *param, t_op *ope)
 {
 	int nbr;
 
@@ -31,6 +65,8 @@ int	check_param(char *param)
 			return (84);
 	}
 	else if (param[0] == '%') {
+		if (param[1] == LABEL_CHAR)
+			return (put_label(ope, param));
 		param[0] = '0';
 		if (my_isnum(param) == 84)
 			return (84);
@@ -40,31 +76,32 @@ int	check_param(char *param)
 	return (1);
 }
 
-int	check_arg(t_op ope, int j, char arg, char *param)
+int	check_arg(t_op *ope, int j, char arg, char *param)
 {
 	static int i = -1;
-	int nb = my_strlen(ope.arg[j]);
+	int nb = my_strlen(ope->arg[j]);
 
-	if (ope.arg[j][i + 1] == 'O')
+	if (ope->arg[j][i + 1] == 'O')
 		i = i + 2;
-	while (ope.arg[j][++i] != '\0') {
-		if (ope.arg[j][i] == arg) {
+	while (ope->arg[j][++i] != '\0') {
+		if (ope->arg[j][i] == arg) {
 			i = i == nb - 1 ? -1 : i;
-			return (check_param(param));
+			return (check_param(param, ope));
 		}
-		if (ope.arg[j][i + 1] != 'O')
+		if (ope->arg[j][i + 1] != 'O')
 			return (84);
 	}
 }
 
-int	check_ac(t_op ope, char **instruct, int j)
+int	check_ac(t_op *ope, char **instruct, int j, int k)
 {
 	int i = length_tab(instruct);
 	int check;
-	int k = 0;
 	int o = 0;
 
-	if (i != ope.ac[j] + 1)
+	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR)
+		i--;
+	if (i != ope->ac[j] + 1)
 		return (84);
 	while (instruct[++k]) {
 		if (instruct[k][o] == '%')
@@ -80,14 +117,17 @@ int	check_ac(t_op ope, char **instruct, int j)
 	return (0);
 }
 
-int	check_error(t_op ope, char **instruct)
+int	check_error(t_op *ope, char **instruct)
 {
 	int i = -1;
 	int j = 0;
+	int k = 0;
 
-	if ((i = check_name(ope, instruct)) == 84)
+	if ((i = check_name(ope, instruct, 0, -1)) == 84)
 		return (84);
-	if ((i = check_ac(ope, instruct, i)) == 84)
+	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR)
+		k = 1;
+	if ((i = check_ac(ope, instruct, i, k)) == 84)
 		return (84);
 	return (i);
 }
