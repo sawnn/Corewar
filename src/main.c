@@ -34,7 +34,7 @@ int	main(int ac, char **av)
 	if ((save = parseur(av[1], av[2], 2, NULL)) == NULL)
 		return (84);
 	//faudra free le tableau instruc et t_op *ope)
-	if (save[1] == NULL || save[2] == NULL)
+	if (save[1] == NULL)
 		return (84);
 	assembleur(av[1], save);
 	return (0);
