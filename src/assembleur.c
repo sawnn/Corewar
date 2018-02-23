@@ -44,17 +44,16 @@ int	assembleur(char *file, char **save)
 	all[j] = NULL;
 	write(fd, &header, sizeof(header_t));
 	while (all[++i] != NULL) {
-		//find_octect_line(save[i], fd);
 		//verifier quon recupere bien le label
 		//verifier les cas speciaux
 		if (find_label(all[i][0]) == 1) {
-			//octect += 8;
+			//octect += 8 ?
 			printf("trouver label %s à [%d]\n", all[i][0], i);
 			if (length_tab(all[i]) == 1) {
 				printf("que 1 avec i = %d\n", i);
 			}
 			else
-				find_octect_line(file, fd, all[i]);
+				printf("octect ligne = %d\n", find_octect_line(all[i]));
 		}
 	}
 }

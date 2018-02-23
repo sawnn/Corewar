@@ -27,7 +27,7 @@ int	find_label(char *str)
 	return (0);
 }
 
-int	find_octect_line(char *str, int fd, char **tab)
+int	find_octect_line(char **tab)
 {
 	int	octect = 0;
 	int	i = 2;
@@ -39,6 +39,5 @@ int	find_octect_line(char *str, int fd, char **tab)
 		which_arg_is(tab[i]) == 3 ? octect += IND_SIZE : 0;
 		i++;
 	}
-	printf("octects = %d\n", octect);
-	//printf("char = %c\n", c);
+	return (octect);
 }

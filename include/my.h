@@ -80,6 +80,7 @@ char	*find_file_name(char *);
 
 /*LABEL.C*/
 int	find_label(char *);
+int	find_octect_line(char **);
 
 /*LIST.C*/
 t_label	*add_link(t_label *, char *, int);
