@@ -39,6 +39,7 @@ char	**cut(char *s, char *pick, char **bac, int i)
 		while (o == 1 || (s[k] >= 33 && s[k] <= 126 && s[k] != 44)) {
 			pick[a++] = s[k++];
 			o = s[k] == '"' ? 0 : o;
+			
 		}
 		if ((s[k] < 33 && i != k) || (s[k] == 44 && i != k)) {
 			pick[a++] = '\0';

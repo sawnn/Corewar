@@ -35,12 +35,32 @@ int	assembleur(char *file, char **save)
 	int	fd = open(my_strcat(find_file_name(file), ".cor"), FLAGS_OPEN);
 	header_t header = init_header(save);
 	int	i = -1;
+	char	***all = malloc(sizeof(char **) * length_tab(save) + sizeof(char **)); 
+	int	j = -1;
+	int o = 1;
 
+	while (++j != length_tab(save))
+		all[j] = my_str_to_word_array(save[++o]);
+	all[j] = NULL;
+	//printf("%s\n", all[0][0]);
+	//j = -1;
+	//while (all[++j] != NULL) {
+	//printf("bordel = %c\n", all[0][0][0]);
+        j = -1;
+	while (all[++j])
+		print_tab(all[j]);
+	//}
+	//printf("le bordel = %s\n", all[0])
+}
+/*
 	write(fd, &header, sizeof(header_t));
 	while (save[++i] != NULL) {
-		//printf("ligne[%d] = %s\n", i, save[i]);
+		find_octect_line(save[i], fd);
+		//verifier quon recupere bien le label
+		//verifier les cas speciaux
 		if (find_label(save[i]) == 1)
 			printf("trouver label %s à [%d]\n", save[i], i);
 	}
 }
 
+*/
