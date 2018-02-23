@@ -37,30 +37,24 @@ int	assembleur(char *file, char **save)
 	int	i = -1;
 	char	***all = malloc(sizeof(char **) * length_tab(save) + sizeof(char **)); 
 	int	j = -1;
-	int o = 1;
+	int	o = 1;
 
-	while (++j != length_tab(save))
+	while (++j != length_tab(save) - 2)
 		all[j] = my_str_to_word_array(save[++o]);
 	all[j] = NULL;
-	//printf("%s\n", all[0][0]);
-	//j = -1;
-	//while (all[++j] != NULL) {
-	//printf("bordel = %c\n", all[0][0][0]);
-        j = -1;
-	while (all[++j])
-		print_tab(all[j]);
-	//}
-	//printf("le bordel = %s\n", all[0])
-}
-/*
 	write(fd, &header, sizeof(header_t));
-	while (save[++i] != NULL) {
-		find_octect_line(save[i], fd);
+	while (all[++i] != NULL) {
+		//find_octect_line(save[i], fd);
 		//verifier quon recupere bien le label
 		//verifier les cas speciaux
-		if (find_label(save[i]) == 1)
-			printf("trouver label %s à [%d]\n", save[i], i);
+		if (find_label(all[i][0]) == 1) {
+			//octect += 8;
+			printf("trouver label %s à [%d]\n", all[i][0], i);
+			if (length_tab(all[i]) == 1) {
+				printf("que 1 avec i = %d\n", i);
+			}
+			else
+				find_octect_line(file, fd, all[i]);
+		}
 	}
 }
-
-*/

@@ -80,14 +80,20 @@ int	check_param(char *param, t_op *ope)
 
 int	check_arg(t_op *ope, int j, char arg, char *param)
 {
+	static int cmp = 0;
 	static int i = -1;
 	int nb = my_strlen(ope->arg[j]);
 
+	if (cmp == ope->ac[j]) {
+		i = -1;
+		cmp = 0;
+	}
 	if (ope->arg[j][i + 1] == 'O')
 		i = i + 2;
 	while (ope->arg[j][++i] != '\0') {
 		if (ope->arg[j][i] == arg) {
 			i = i == nb - 1 ? -1 : i;
+			cmp++;
 			return (check_param(param, ope));
 		}
 		if (ope->arg[j][i + 1] != 'O')
@@ -102,8 +108,9 @@ int	check_ac(t_op *ope, char **instruct, int j, int k)
 	int check;
 	int o = 0;
 
-	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR)
+	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR) {
 		i--;
+	}
 	if (i != ope->ac[j] + 1)
 		return (84);
 	while (instruct[++k]) {
