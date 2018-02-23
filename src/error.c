@@ -22,6 +22,8 @@ int	check_name(t_op *ope, char **instruct, int bool, int i)
 		ope->label[j] = my_strdup(instruct[0]);
 		ope->label[j][my_strlen(instruct[0]) - 1] = '\0';
 		bool = 1;
+		if (instruct[1] == NULL)
+			return (-1);
 	}
 	ope->label[j + 1] = NULL;
 	while (ope->tab[++i] != NULL) {
@@ -126,7 +128,8 @@ int	check_error(t_op *ope, char **instruct)
 
 	if ((i = check_name(ope, instruct, 0, -1)) == 84)
 		return (84);
-	
+	if (i == -1)
+		return (i);
 	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR)
 		k = 1;
 	if ((i = check_ac(ope, instruct, i, k)) == 84)

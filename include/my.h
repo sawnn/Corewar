@@ -25,6 +25,12 @@ typedef	struct	s_op {
 	
 } t_op;
 
+typedef	struct	s_label {
+	char	*label_name;
+	int	octect;
+	struct	s_label *next;
+} t_label;
+
 /*UTILITY.C*/
 int	my_strcmp(char *, char *);
 int	length_tab(char **);
@@ -71,4 +77,13 @@ void	*my_memset(char *, int, size_t);
 
 /*FILE.C*/
 char	*find_file_name(char *);
+
+/*LABEL.C*/
+int	find_label(char *);
+
+/*LIST.C*/
+t_label	*add_link(t_label *, char *, int);
+void	print_list(t_label *);
+int	length_list(t_label *);
+int	delete_t_label(t_label **, int);
 #endif

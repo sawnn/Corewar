@@ -15,7 +15,9 @@ SRC	=	src/main.c			\
 		src/error.c			\
 		src/utility_assem.c		\
 		src/assembleur.c		\
-		src/file.c
+		src/file.c			\
+		src/label.c			\
+		src/list.c
 
 OBJ	=	$(SRC:.c=.o)
 
