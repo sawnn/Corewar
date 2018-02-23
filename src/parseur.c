@@ -34,9 +34,9 @@ char	**check_label(char **save, t_op ope)
 	int i = -1;
 	int j = -1;
 
-	
 	while (ope.isempty == 1 && ope.check_lab[++i] != NULL) {
-		while (ope.label[++j] != NULL && my_strcmp(ope.label[j], ope.check_lab[i]) != 0);
+		while (ope.label[++j] != NULL
+			&& my_strcmp(ope.label[j], ope.check_lab[i]) != 0);
 		if (ope.label[j] == NULL)
 			return (NULL);
 		j = -1;
@@ -57,7 +57,7 @@ char	**parseur(char *str, char *str2, int j, char *s)
 	while ((s = get_next_line(fd2))) {
 		if (s[0] != '\0' && (instruc = my_str_to_word_array(s)) == NULL)
 			return (NULL);
-		if (s[0] != '\0' && instruc[0] != NULL && check_error(&ope, instruc) == 84)
+		if (s[0] != '\0' && instruc[0] != NULL && HELP)
 			return (NULL);
 		else if (s[0] != '\0' && instruc[0] != NULL) {
 			save[j++] = my_strdup(s);

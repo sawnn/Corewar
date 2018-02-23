@@ -8,6 +8,7 @@
 #ifndef MY_H
 #define MY_H
 #define READ_SIZE (1)
+#define HELP check_error(&ope, instruc) == 84
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>

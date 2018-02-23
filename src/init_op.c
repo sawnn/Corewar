@@ -31,47 +31,47 @@ int	init_arg(t_op *ope)
 	ope->arg[16] = NULL;
 }
 
-int     init_op(t_op *ope)
+int	init_op(t_op *ope)
 {
 	ope->tab = malloc(sizeof(char *) * 16 + sizeof(char *));
-        if (ope->tab == NULL)
-                return (84);
-        ope->tab[0] = "live";
+	if (ope->tab == NULL)
+		return (84);
+	ope->tab[0] = "live";
 	ope->tab[1] = "ld";
-        ope->tab[2] = "st";
-        ope->tab[3] = "add";
-        ope->tab[4] = "sub";
-        ope->tab[5] = "and";
-        ope->tab[6] = "or";
-        ope->tab[7] = "xor";
+	ope->tab[2] = "st";
+	ope->tab[3] = "add";
+	ope->tab[4] = "sub";
+	ope->tab[5] = "and";
+	ope->tab[6] = "or";
+	ope->tab[7] = "xor";
 	ope->tab[8] = "zjmp";
-        ope->tab[9] = "ldi";
-        ope->tab[10] = "sti";
+	ope->tab[9] = "ldi";
+	ope->tab[10] = "sti";
 	ope->tab[11] = "fork";
-        ope->tab[12] = "lld";
-        ope->tab[13] = "lldi";
-        ope->tab[14] = "lfork";
-        ope->tab[15] = "aff";
-        ope->tab[16] = NULL;
+	ope->tab[12] = "lld";
+	ope->tab[13] = "lldi";
+	ope->tab[14] = "lfork";
+	ope->tab[15] = "aff";
+	ope->tab[16] = NULL;
 }
 
-int     init_ac(t_op *ope)
+int	init_ac(t_op *ope)
 {
 	int i = -1;
 
-        ope->ac = malloc(sizeof(int) * 17);
+	ope->ac = malloc(sizeof(int) * 17);
 	if (ope->ac == NULL)
-                return (84);
-        while (++i < 16) {
-	        if (i + 1 == 1 || i + 1 == 9
-                    || i + 1 == 12 || i + 1 == 15 || i + 1 == 16)
-                        ope->ac[i] = 1;
-                else if (i + 1 == 2 || i + 1 == 3 || i + 1 == 13)
-                        ope->ac[i] = 2;
-                else
-                        ope->ac[i] = 3;
+		return (84);
+	while (++i < 16) {
+		if (i + 1 == 1 || i + 1 == 9
+		|| i + 1 == 12 || i + 1 == 15 || i + 1 == 16)
+			ope->ac[i] = 1;
+		else if (i + 1 == 2 || i + 1 == 3 || i + 1 == 13)
+			ope->ac[i] = 2;
+		else
+			ope->ac[i] = 3;
 	}
-        return (0);
+	return (0);
 }
 
 int	pars_head(char **head, int i, int j)

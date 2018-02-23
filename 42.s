@@ -4,3 +4,5 @@
 entree:	zjmp %:entree
 
 bite:	live %1
+
+toto:	zjmp %:toto
