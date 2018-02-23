@@ -1,0 +1,13 @@
+/*
+** EPITECH PROJECT, 2018
+** champion
+** File description:
+** 
+*/
+
+int	write_champion(char **save)
+{
+	int i = 1;
+
+	
+}

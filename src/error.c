@@ -84,16 +84,19 @@ int	check_arg(t_op *ope, int j, char arg, char *param)
 	static int i = -1;
 	int nb = my_strlen(ope->arg[j]);
 
-	if (cmp == ope->ac[j]) {
-		i = -1;
-		cmp = 0;
-	}
+	
+	
+	printf("lol = %d\n", i);
 	if (ope->arg[j][i + 1] == 'O')
 		i = i + 2;
 	while (ope->arg[j][++i] != '\0') {
 		if (ope->arg[j][i] == arg) {
 			i = i == nb - 1 ? -1 : i;
 			cmp++;
+			if (cmp == ope->ac[j]) {
+				i = -1;
+				cmp = 0;
+			}
 			return (check_param(param, ope));
 		}
 		if (ope->arg[j][i + 1] != 'O')
@@ -116,10 +119,15 @@ int	check_ac(t_op *ope, char **instruct, int j, int k)
 	while (instruct[++k]) {
 		if (instruct[k][o] == '%')
 			check = check_arg(ope, j, 'D', instruct[k]);
-		else if (instruct[k][o] == 'r')
+		else if (instruct[k][o] == 'r') {
+			
 			check = check_arg(ope, j, 'R', instruct[k]);
-		else
+			printf("1 %d\n", check);
+		}
+		else {
 			check = check_arg(ope, j, 'I', instruct[k]);
+			printf("2 %d\n", check);
+		}
 		if (check == 84)
 			return (84);
 		o = 0;
