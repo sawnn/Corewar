@@ -1,8 +1,4 @@
 .name "On m'apelle 42"
 .comment "Je suis assez fort comme champion, c'est vrai"
 
-entree:	zjmp %:entree
-
-bite:	live %1
-
-toto:	zjmp %:toto
+sti r15, 23, %34

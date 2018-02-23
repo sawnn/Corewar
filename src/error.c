@@ -90,6 +90,7 @@ int	check_arg(t_op *ope, int j, char arg, char *param)
 		}
 		if (ope->arg[j][i + 1] != 'O')
 			return (84);
+		i++;
 	}
 }
 
@@ -125,6 +126,7 @@ int	check_error(t_op *ope, char **instruct)
 
 	if ((i = check_name(ope, instruct, 0, -1)) == 84)
 		return (84);
+	
 	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR)
 		k = 1;
 	if ((i = check_ac(ope, instruct, i, k)) == 84)
