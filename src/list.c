@@ -35,7 +35,7 @@ void	print_list(t_label *head)
 
 	temp = head;
 	while (temp != NULL) {
-		//my_putstr(temp->label_name);
+		//my_putstr(temp->label_name, 1);
 		//write(1, "\n", 1);
 		temp = temp->next;
 	}

@@ -38,6 +38,11 @@ char	*my_strdup(char *);
 char	*my_strcpy(char *, char *);
 int	my_isnum(char *);
 
+/*BASIC.C*/
+int	my_strlenchar(char *, char);
+void	my_putstr(char *, int);
+void	print_tab(char **);
+
 /*PARSEUR.C*/
 char	**parseur(char *, char *, int, char *);
 
@@ -69,18 +74,19 @@ char    *my_putnbr_base(unsigned int nbr, char *base);
 
 /*ASSEMBLEUR.C*/
 int	assembleur(char *, char **);
-header_t init_header(char **);
+void init_header(char **, int);
+
 /*UTILITY_ASSEM.C*/
 char	*take_header_str(char *);
-int	my_strlenchar(char *, char);
 void	*my_memset(char *, int, size_t);
+char	***fill_all_tab(char ***, char **);
 
 /*FILE.C*/
 char	*find_file_name(char *);
 
 /*LABEL.C*/
 int	find_label(char *);
-int	find_octect_line(char **);
+int	find_octect_line(char **, int);
 
 /*LIST.C*/
 t_label	*add_link(t_label *, char *, int);

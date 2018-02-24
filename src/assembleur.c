@@ -10,7 +10,7 @@
 //ou be32toh > <endian.h>
 #define FLAGS_OPEN	O_RDWR | O_APPEND | O_CREAT, 0644
 
-header_t	init_header(char **save)
+void	init_header(char **save, int fd)
 {
 	header_t	header;
 	int	i = -1;
@@ -22,38 +22,31 @@ header_t	init_header(char **save)
 	my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 1);
 	while (name[++i])
 		header.prog_name[i] = name[i];
-	//header.prog_size = my_BIG_ENDIAN(0);
+	header.prog_size = be32toh(0);
+//header.prog_size = my_BIG_ENDIAN(0);
 	i = -1;
 	my_memset(header.comment, '\0', COMMENT_LENGTH + 1);
 	while (comment[++i])
 		header.comment[i] = comment[i];
-	return (header);
+	write(fd, &header, sizeof(header_t));
 }
 
 int	assembleur(char *file, char **save)
 {
 	int	fd = open(my_strcat(find_file_name(file), ".cor"), FLAGS_OPEN);
-	header_t header = init_header(save);
 	int	i = -1;
-	char	***all = malloc(sizeof(char **) * length_tab(save) + sizeof(char **)); 
-	int	j = -1;
-	int	o = 1;
+	char	***all = fill_all_tab(all, save);
 
-	while (++j != length_tab(save) - 2)
-		all[j] = my_str_to_word_array(save[++o]);
-	all[j] = NULL;
-	write(fd, &header, sizeof(header_t));
+//verifier quon recupere bien le label
+	//verifier les cas speciaux
+	//octect += 8 ?
+	if (fd == -1 || all == NULL)
+		return (84);
+	init_header(save, fd);
 	while (all[++i] != NULL) {
-		//verifier quon recupere bien le label
-		//verifier les cas speciaux
-		if (find_label(all[i][0]) == 1) {
-			//octect += 8 ?
-			printf("trouver label %s à [%d]\n", all[i][0], i);
-			if (length_tab(all[i]) == 1) {
-				printf("que 1 avec i = %d\n", i);
-			}
-			else
-				printf("octect ligne = %d\n", find_octect_line(all[i]));
-		}
+		if (find_label(all[i][0]) == 1)
+			printf("octect ligne = %d avec i = %d\n", find_octect_line(all[i], 2), i);
+		else
+			printf("octect ligne = %d avec i = %d\n", find_octect_line(all[i], 1), i);
 	}
 }

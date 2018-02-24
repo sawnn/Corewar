@@ -27,17 +27,20 @@ int	find_label(char *str)
 	return (0);
 }
 
-int	find_octect_line(char **tab)
+int	find_octect_line(char **tab, int pos)
 {
 	int	octect = 0;
-	int	i = 2;
-
+	int	i = pos;
+	static	int	j = 0;
 	octect += 2; // pour op code et bytecodes
+	printf("length tab = %d\n", length_tab(tab));
 	while (i != length_tab(tab)) {
+		printf("%d: tab[%d] = %s\n", j, i, tab[i]);
 		which_arg_is(tab[i]) == 1 ? octect += REG_SIZE : 0;
 		which_arg_is(tab[i]) == 2 ? octect += DIR_SIZE : 0;
 		which_arg_is(tab[i]) == 3 ? octect += IND_SIZE : 0;
 		i++;
 	}
+	j += 1;
 	return (octect);
 }

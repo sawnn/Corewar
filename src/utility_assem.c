@@ -7,25 +7,18 @@
 
 #include "../include/my.h"
 
-void	my_putstr(char *str)
+char	***fill_all_tab(char ***all, char **save)
 {
-	write(1, str, my_strlen(str));
-}
+	int	j = -1;
+	int	o = 1;
 
-void	print_tab(char **tab)
-{
-	int	i = -1;
-
-	while (tab[++i] != NULL)
-		my_putstr(tab[i]);
-}
-
-int	my_strlenchar(char *str, char c)
-{
-	int	i = -1;
-
-	while (str[++i] != c);
-	return (i);
+	all = malloc(sizeof(char **) * length_tab(save) + sizeof(char **));
+	if (!all)
+		return (NULL);
+	while (++j != length_tab(save) - 2)
+		all[j] = my_str_to_word_array(save[++o]);
+	all[j] = NULL;
+	return (all);
 }
 
 char	*take_header_str(char *str)

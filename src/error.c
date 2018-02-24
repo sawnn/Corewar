@@ -86,7 +86,7 @@ int	check_arg(t_op *ope, int j, char arg, char *param)
 
 	
 	
-	printf("lol = %d\n", i);
+//	printf("lol = %d\n", i);
 	if (ope->arg[j][i + 1] == 'O')
 		i = i + 2;
 	while (ope->arg[j][++i] != '\0') {
@@ -122,11 +122,11 @@ int	check_ac(t_op *ope, char **instruct, int j, int k)
 		else if (instruct[k][o] == 'r') {
 			
 			check = check_arg(ope, j, 'R', instruct[k]);
-			printf("1 %d\n", check);
+			//printf("1 %d\n", check);
 		}
 		else {
 			check = check_arg(ope, j, 'I', instruct[k]);
-			printf("2 %d\n", check);
+			//	printf("2 %d\n", check);
 		}
 		if (check == 84)
 			return (84);
