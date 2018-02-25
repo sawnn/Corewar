@@ -45,7 +45,7 @@ int	assembleur(char *file, char **save)
 		return (84);
 	init_header(save, fd);
 	while (all[++i] != NULL) {
-		printf("octect ich turn = %d - str = %s\n", octect, all[i][0]);
+		//printf("octect ich turn = %d - str = %s\n", octect, all[i][0]);
 		if (find_label(all[i][0]) == 1) {
 			label = add_link(label, all[i][0], octect);
 			octect += find_octect_line(all[i], 2);
@@ -53,6 +53,6 @@ int	assembleur(char *file, char **save)
 		else
 			octect += find_octect_line(all[i], 1);
 	}
-	printf("OCTECT FINAL = %d\n", octect);
-	print_list(label);
+//	printf("OCTECT FINAL = %d\n", octect);
+//	print_list(label);
 }
