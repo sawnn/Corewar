@@ -7,6 +7,8 @@
 
 #include "../include/my.h"
 
+#define SP SEPARATOR_CHAR
+
 int	calcule(char const *str)
 {
 	int i = 1;
@@ -18,7 +20,7 @@ int	calcule(char const *str)
 			o++;
 		if (o == 2)
 			o = 0;
-		if (o != 1 && (str[k] < 33 || str[k] > 126 || str[k] == 44)) {
+		if (o != 1 && (str[k] < 33 || str[k] > 126 || str[k] == SP)) {
 			i++;
 		}
 		k++;
@@ -36,12 +38,12 @@ char	**cut(char *s, char *pick, char **bac, int i)
 	while (pick && bac && ++k < my_strlen(s)) {
 		i = k;
 		o = s[k] == '"' ? o + 1 : o;
-		while (o == 1 || (s[k] >= 33 && s[k] <= 126 && s[k] != 44)) {
+		while (o == 1 || (s[k] >= 33 && s[k] <= 126 && s[k] != SP)) {
 			pick[a++] = s[k++];
 			o = s[k] == '"' ? 0 : o;
 			
 		}
-		if ((s[k] < 33 && i != k) || (s[k] == 44 && i != k)) {
+		if ((s[k] < 33 && i != k) || (s[k] == SP && i != k)) {
 			pick[a++] = '\0';
 			bac[j++] = my_strdup(pick);
 		}

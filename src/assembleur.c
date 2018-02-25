@@ -36,7 +36,8 @@ int	assembleur(char *file, char **save)
 	int	fd = open(my_strcat(find_file_name(file), ".cor"), FLAGS_OPEN);
 	int	i = -1;
 	char	***all = fill_all_tab(all, save);
-
+	int	octect = 0;
+	t_label	*label = NULL;
 //verifier quon recupere bien le label
 	//verifier les cas speciaux
 	//octect += 8 ?
@@ -44,9 +45,14 @@ int	assembleur(char *file, char **save)
 		return (84);
 	init_header(save, fd);
 	while (all[++i] != NULL) {
-		if (find_label(all[i][0]) == 1)
-			printf("octect ligne = %d avec i = %d\n", find_octect_line(all[i], 2), i);
+		printf("octect ich turn = %d - str = %s\n", octect, all[i][0]);
+		if (find_label(all[i][0]) == 1) {
+			label = add_link(label, all[i][0], octect);
+			octect += find_octect_line(all[i], 2);
+		}
 		else
-			printf("octect ligne = %d avec i = %d\n", find_octect_line(all[i], 1), i);
+			octect += find_octect_line(all[i], 1);
 	}
+	printf("OCTECT FINAL = %d\n", octect);
+	print_list(label);
 }

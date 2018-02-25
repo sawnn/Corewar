@@ -35,7 +35,8 @@ void	print_list(t_label *head)
 
 	temp = head;
 	while (temp != NULL) {
-		//my_putstr(temp->label_name, 1);
+		printf("label = %s -- octect = %d\n", temp->label_name, temp->octect);
+//my_putstr(temp->label_name, 1);
 		//write(1, "\n", 1);
 		temp = temp->next;
 	}

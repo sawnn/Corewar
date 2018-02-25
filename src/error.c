@@ -84,15 +84,14 @@ int	check_arg(t_op *ope, int j, char arg, char *param)
 	static int i = -1;
 	int nb = my_strlen(ope->arg[j]);
 
-	
-	
-//	printf("lol = %d\n", i);
 	if (ope->arg[j][i + 1] == 'O')
 		i = i + 2;
 	while (ope->arg[j][++i] != '\0') {
 		if (ope->arg[j][i] == arg) {
 			i = i == nb - 1 ? -1 : i;
 			cmp++;
+			while (ope->arg[j][i + 1] == 'O')
+				i += 2;
 			if (cmp == ope->ac[j]) {
 				i = -1;
 				cmp = 0;
