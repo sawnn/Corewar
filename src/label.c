@@ -55,31 +55,21 @@ int	is_label_to_save(char **tab)
 	while (++i != length_tab(tab)) {
 		//printf("tab[%d][0] = %c - tab[%d][1] = %c\n", i, tab[i][0], i, tab[i][1]);
 		if ((tab[i][0] == DIRECT_CHAR) && (tab[i][1] == LABEL_CHAR)) {
-			printf("is label avec = %s\n", tab[i]);
 			return (1);
 		}
 	}
 	return (0);
 }
 
-int	find_octect_line(char **tab, int pos, int **olabel, int save, int *j)
+int	find_octect_line(char **tab, int pos, int **olabel)
 {
 	int	octect = 0;
 	int	i = pos + 1;
 	
-	printf("save = %d\n", save);
 	if (tab[1] == NULL) //ou remettre i ?
 		return (0);
 	octect += 2;
-	if (is_label_to_save(tab) == 1) {
-		printf("j = %d\n", (*j));
-		(*olabel[(*j++)]) = save;
-		(*olabel) = realloc((*olabel), sizeof(int) * (2 + (*j) + 1));
-		//printf("%d et %d\n", (*j), *olabel[(*j)]);
-		//(*olabel[(*j)]) = -1;
-	}
 	is_remove_bytecode(tab[pos], &octect);
-//	printf("> = %d\n", octect);
 	while (i != length_tab(tab)) {
 		if (is_special_case(tab[pos]) == 1)
 			which_arg_is_special(tab[i], &octect);

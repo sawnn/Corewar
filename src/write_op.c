@@ -115,8 +115,22 @@ int	write_op(char ***all, int fd, int i, int j)
 	}
 }
 
-int	write_file(char ***all, t_label *label, int fd)
+int	change_label(char ***all, t_label *label)
 {
+	int i = -1;
+	int j = -1;
+
+	while (all[++i] != NULL) {
+		while (all[i][++j] != NULL) {
+			
+		}
+		j = -1;
+	}
+}
+
+int	write_file(char ***all, t_label *label, int fd, int *olabel)
+{
+	//change_label(all, label);
 	write_op(all, fd, -1, -1);
 	return (0);
 }

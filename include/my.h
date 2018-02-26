@@ -90,8 +90,10 @@ char	*find_file_name(char *);
 int	which_arg_is(char *);
 int	which_arg_is_special(char *, int *);
 int	find_label(char *);
-int	find_octect_line(char **, int, int **, int, int *);
+int	find_octect_line(char **, int, int **);
 int	is_special_case(char *);
+int	is_label_to_save(char **);
+void	print_int(int *);
 
 /*LABEL_BIS.C*/
 void	is_remove_bytecode(char *, int *);
@@ -104,5 +106,5 @@ int	delete_t_label(t_label **, int);
 
 /*WRITE_OP.C*/
 int write_op(char ***, int, int, int);
-int write_file(char ***, t_label*, int);
+int write_file(char ***, t_label*, int, int *);
 #endif
