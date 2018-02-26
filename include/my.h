@@ -85,8 +85,14 @@ char	***fill_all_tab(char ***, char **);
 char	*find_file_name(char *);
 
 /*LABEL.C*/
+int	which_arg_is(char *);
+int	which_arg_is_special(char *, int *);
 int	find_label(char *);
 int	find_octect_line(char **, int);
+int	is_special_case(char **, int, int *);
+
+/*LABEL_BIS.C*/
+void	is_remove_bytecode(char *, int *);
 
 /*LIST.C*/
 t_label	*add_link(t_label *, char *, int);

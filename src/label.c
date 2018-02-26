@@ -18,6 +18,15 @@ int	which_arg_is(char *str)
 	return (0);
 }
 
+int	which_arg_is_special(char *str, int *octect)
+{
+	if (str[0] == 'r')
+		(*octect) += 1;
+	else
+		(*octect) += 2;
+	return (1);
+}
+
 int	find_label(char *str)
 {
 	int	i = my_strlen(str);
@@ -26,25 +35,38 @@ int	find_label(char *str)
 		return (1);
 	return (0);
 }
+	
+int	is_special_case(char **tab, int pos, int *octect)
+{
+	char	*sp[7] = {"sti", "ldi", "lldi", "zjump", "fork", "lfork", NULL};
+	int	i = -1;
+
+	while (++i != length_tab(sp)) {
+		if (my_strcmp(sp[i], tab[pos]) == 0)
+			return (1);
+	}
+	return (0);
+}
 
 int	find_octect_line(char **tab, int pos)
 {
 	int	octect = 0;
-	int	i = pos;
-	static	int	j = 0;
+	int	i = pos + 1;
 
-	if (tab[i] == NULL)
+	if (tab[1] == NULL) //ou remettre i ?
 		return (0);
-	octect += 2; // pour op code et bytecodes
-	//si ya que le label return 0
-//printf("length tab = %d\n", length_tab(tab));
+	octect += 2;
+	is_remove_bytecode(tab[pos], &octect);
+	printf("> = %d\n", octect);
 	while (i != length_tab(tab)) {
-		//		printf("%d: tab[%d] = %s\n", j, i, tab[i]);
-		which_arg_is(tab[i]) == 1 ? octect += REG_SIZE : 0;
-		which_arg_is(tab[i]) == 2 ? octect += DIR_SIZE : 0;
-		which_arg_is(tab[i]) == 3 ? octect += IND_SIZE : 0;
+		if (is_special_case(tab, pos, &octect) == 1)
+			which_arg_is_special(tab[i], &octect);
+		else {
+			which_arg_is(tab[i]) == 1 ? octect += REG_SIZE : 0;
+			which_arg_is(tab[i]) == 2 ? octect += DIR_SIZE : 0;
+			which_arg_is(tab[i]) == 3 ? octect += IND_SIZE : 0;
+		}
 		i++;
 	}
-	j += 1;
 	return (octect);
 }

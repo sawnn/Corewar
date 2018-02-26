@@ -2,8 +2,11 @@
 .comment "Je suis assez fort comme championc c'est vrai"
 
 fdp:	sti r2, 43, %434
-	sti r14, 23, %32
+	live %42
 
 
 toot:
-	sti r15, 23, %34
+	sti r15, 23, %:fdp
+	fork %:fdp
+	zjmp %:toot
+	add r1, r2, r4
