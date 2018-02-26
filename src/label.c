@@ -57,7 +57,7 @@ int	find_octect_line(char **tab, int pos)
 		return (0);
 	octect += 2;
 	is_remove_bytecode(tab[pos], &octect);
-	printf("> = %d\n", octect);
+//	printf("> = %d\n", octect);
 	while (i != length_tab(tab)) {
 		if (is_special_case(tab, pos, &octect) == 1)
 			which_arg_is_special(tab[i], &octect);
