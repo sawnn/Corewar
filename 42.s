@@ -6,7 +6,7 @@ fdp:	sti r2, 43, %434
 
 
 toot:
-	sti r15, 23, %:fdp
-	fork %:fdp
-	zjmp %:toot
+	sti r15, 23, %2
+	fork %3
+	zjmp %1
 	add r1, r2, r4

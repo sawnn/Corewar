@@ -56,4 +56,5 @@ int	assembleur(char *file, char **save)
 	}
 //	printf("OCTECT FINAL = %d\n", octect);
 //	print_list(label);
+	write_file(all, label, fd);
 }

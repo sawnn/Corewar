@@ -38,7 +38,7 @@ int	find_label(char *str)
 	
 int	is_special_case(char *str)
 {
-	char	*sp[7] = {"sti", "ldi", "lldi", "zjump", "fork", "lfork", NULL};
+	char	*sp[7] = {"sti", "ldi", "lldi", "zjmp", "fork", "lfork", NULL};
 	int	i = -1;
 
 	while (++i != length_tab(sp)) {

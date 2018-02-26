@@ -104,4 +104,5 @@ int	delete_t_label(t_label **, int);
 
 /*WRITE_OP.C*/
 int write_op(char ***, int, int, int);
+int write_file(char ***, t_label*, int);
 #endif
