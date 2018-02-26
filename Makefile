@@ -20,6 +20,7 @@ SRC	=	src/main.c			\
 		src/list.c			\
 		src/basic.c			\
 		src/label_bis.c			\
+		src/write_op.c			\
 		src/convert_endian.c
 
 OBJ	=	$(SRC:.c=.o)

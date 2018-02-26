@@ -45,6 +45,8 @@ void	print_tab(char **);
 
 /*PARSEUR.C*/
 char	**parseur(char *, char *, int, char *);
+int	init_struct(t_op *);
+int	send_op(t_op, char **);
 
 /*INIT_OP.C*/
 int	init_op(t_op *);
@@ -99,4 +101,7 @@ t_label	*add_link(t_label *, char *, int);
 void	print_list(t_label *);
 int	length_list(t_label *);
 int	delete_t_label(t_label **, int);
+
+/*WRITE_OP.C*/
+int write_op(char ***, int, int, int);
 #endif

@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-int	send_op(int fd, t_op ope, char **instruc)
+int	send_op(t_op ope, char **instruc)
 {
 	int	i = -1;
 
