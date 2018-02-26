@@ -40,21 +40,26 @@ int	assembleur(char *file, char **save)
 	char	***all = fill_all_tab(all, save);
 	int	octect = 0;
 	t_label	*label = NULL;
-
+	int	*olabel = malloc(sizeof(int) * 10);
+	int	k = 0;
 	//octect += 8 ? //verifier cas speciaux
+	//olabel[1] = -1;
 	if (fd == -1 || all == NULL)
 		return (84);
 	init_header(save, fd);
 	while (all[++i] != NULL) {
+		int	o_save = octect;
 //		printf("octect ich turn = %d - str = %s\n", octect, all[i][0]);
 		if (find_label(all[i][0]) == 1) {
 			label = add_link(label, all[i][0], octect);
-			octect += find_octect_line(all[i], 1);
+			octect += find_octect_line(all[i], 1, &olabel, o_save, &k);
 		}
 		else
-			octect += find_octect_line(all[i], 0);
+			octect += find_octect_line(all[i], 0, &olabel, o_save, &k);
+		
 	}
-//	printf("OCTECT FINAL = %d\n", octect);
-//	print_list(label);
+	printf("OCTECT FINAL = %d\n", octect);
+	print_list(label);
+	//print_int(olabel);
 	write_file(all, label, fd);
 }

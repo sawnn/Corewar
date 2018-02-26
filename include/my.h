@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include "op.h"
-
+//#define	PARAM int save, int j
 typedef	struct	s_op {
 	char	**arg;
 	int	*ac;
@@ -90,7 +90,7 @@ char	*find_file_name(char *);
 int	which_arg_is(char *);
 int	which_arg_is_special(char *, int *);
 int	find_label(char *);
-int	find_octect_line(char **, int);
+int	find_octect_line(char **, int, int **, int, int *);
 int	is_special_case(char *);
 
 /*LABEL_BIS.C*/
