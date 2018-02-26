@@ -7,7 +7,59 @@
 
 #include "../include/my.h"
 
-int	get_bytecode
+int     bin_to_dec(char *bin)
+{
+        int total = 0;
+        int nb = 128;
+        int o = 0;
+
+        while (o < 8) {
+                total = total + (nb * (bin[o] - 48));
+                o++;
+                nb /= 2;
+        }
+        return (total);
+}
+
+int	get_bytecode(char **arg, int fd)
+{
+	int i = -1;
+	int o = 0;
+	char bytcode[8];
+
+	while (arg[++i] != NULL) {
+		if (arg[i][0] == 'r') {
+			bytcode[o++] = '0';
+			bytcode[o++] = '1';
+		}
+		else if (arg[i][0] == '%') {
+			bytcode[o++] = '1';
+			bytcode[o++] = '0';
+		}
+		else {
+			bytcode[o++] = '1';
+			bytcode[o++] = '1';
+		}
+	}
+	while (o != 8)
+		bytcode[o++] = '0';
+	bytcode[o] = '\0';
+	int ok = bin_to_dec(bytcode);
+	write(fd, &ok, 1);
+
+}
+
+int is_bytecode(char *str)
+{
+        char    *sp[5] = {"live", "fork", "lfork", "zjmp", NULL};
+        int     i = -1;
+
+        while (++i != length_tab(sp)) {
+                if (my_strcmp(sp[i], str) == 0)
+                        return (1);
+        }
+	return (0);
+}
 
 int	write_arg(char *arg, int fd, int *octet, char *ope)
 {
@@ -51,6 +103,8 @@ int	write_op(char ***all, int fd, int i, int j)
 			op = send_op(ope, &all[i][++j]);
 			str = my_strdup(all[i][j]);
 			write(fd, &op, octet);
+			if (is_bytecode(all[i][j]) == 0)
+				get_bytecode(&all[i][j + 1], fd);
 		}
 		while (all[i][++j] != NULL) {
 			op = write_arg(all[i][j], fd, &octet, str);
