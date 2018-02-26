@@ -7,6 +7,8 @@
 
 #include "../include/my.h"
 
+int	get_bytecode
+
 int	write_arg(char *arg, int fd, int *octet, char *ope)
 {
 	int i = -1;
