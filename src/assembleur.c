@@ -54,6 +54,6 @@ int	assembleur(char *file, char **save)
 		else
 			octect += find_octect_line(all[i], 0);
 	}
-	//	printf("OCTECT FINAL = %d\n", octect);
+//	printf("OCTECT FINAL = %d\n", octect);
 //	print_list(label);
 }
