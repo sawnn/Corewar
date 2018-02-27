@@ -121,14 +121,18 @@ char	*index_o(char *str, t_label *label, int *olabel, int j)
 	int nbr = 0;
 	static int k = -1;
 	char *tmp;
+	t_label	*tmp2 = label;
 
-	while (label->next != NULL) {
-		if (my_strcmp(label->label_name, str) == 0) {
-			nbr = ((olabel[++k] - label->octect) * -1);
+	//printf("%s\n", str);
+	while (tmp2 != NULL) {
+		printf("'%s'\n", tmp2->label_name);
+		if (my_strcmp(tmp2->label_name, str) == 0) {
+			printf("%s\n", tmp2->label_name);
+			nbr = ((olabel[++k] - tmp2->octect) * -1);
 			tmp = my_getstr(nbr);
 			return (tmp);
 		}
-		label = label->next;
+		tmp2 = tmp2->next;
 	}
 }
 
@@ -139,8 +143,12 @@ char	***change_label(char ***all, t_label *label, int *olabel)
 
 	while (all[++i] != NULL) {
 		while (all[i][++j] != NULL) {
-			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR) 
+			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR) {
+				//printf("%s\n", all[i][j]);
 				all[i][j] = index_o(all[i][j], label, olabel, j);
+				//printf("%s\n", all[i][j]);
+			}
+			
 		}
 		j = -1;
 	}

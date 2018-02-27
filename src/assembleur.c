@@ -27,7 +27,7 @@ void	init_header(char **save, int fd, int size)
 	header.prog_size = my_BIG_ENDIAN(size);
 	//header.prog_size = my_BIG_ENDIAN(0);
 	i = -1;
-	my_memset(header.comment, '\0', COMMENT_LENGTH + 1);
+	my_memset(header.comment, '\0', COMMENT_LENGTH + 2);
 	while (comment[++i])
 		header.comment[i] = comment[i];
 	write(fd, &header, sizeof(header_t));
@@ -63,7 +63,7 @@ int	assembleur(char *file, char **save)
 	}
 	olabel[k] = -1;
 //	printf("OCTECT FINAL = %d - bigendian = %d\n", octect, be32toh(octect));
-	//print_list(label);
+//	print_list(label);
 	init_header(save, fd, octect);
 
 //	print_int(olabel);
