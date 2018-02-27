@@ -110,4 +110,6 @@ int write_file(char ***, t_label*, int, int *);
 
 /*MY_GETSTR*/
 char	*my_getstr(int);
+
+int	little_to_big_endian(int);
 #endif
