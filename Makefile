@@ -26,7 +26,7 @@ SRC	=	src/main.c			\
 
 OBJ	=	$(SRC:.c=.o)
 
-NAME	=	asm
+NAME	=	asm/asm
 
 all:	$(NAME)
 
