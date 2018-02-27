@@ -76,7 +76,7 @@ char    *my_putnbr_base(unsigned int nbr, char *base);
 
 /*ASSEMBLEUR.C*/
 int	assembleur(char *, char **);
-void init_header(char **, int);
+void	init_header(char **, int, int);
 
 /*UTILITY_ASSEM.C*/
 char	*take_header_str(char *);
@@ -107,4 +107,7 @@ int	delete_t_label(t_label **, int);
 /*WRITE_OP.C*/
 int write_op(char ***, int, int, int);
 int write_file(char ***, t_label*, int, int *);
+
+/*MY_GETSTR*/
+char	*my_getstr(int);
 #endif

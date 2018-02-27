@@ -69,8 +69,8 @@ int	check_param(char *param, t_op *ope)
 	else if (param[0] == '%') {
 		if (param[1] == LABEL_CHAR)
 			return (put_label(ope, param));
-		param[0] = '0';
-		if (my_isnum(param) == 84)
+		//param[0] = '0';
+		if (my_isnum(&param[1]) == 84)
 			return (84);
 	}
 	else if (my_isnum(param) == 84)

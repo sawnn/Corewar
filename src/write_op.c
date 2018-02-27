@@ -7,18 +7,18 @@
 
 #include "../include/my.h"
 
-int     bin_to_dec(char *bin)
+int	bin_to_dec(char *bin)
 {
-        int total = 0;
-        int nb = 128;
-        int o = 0;
+	int total = 0;
+	int nb = 128;
+	int o = 0;
 
-        while (o < 8) {
-                total = total + (nb * (bin[o] - 48));
-                o++;
-                nb /= 2;
-        }
-        return (total);
+	while (o < 8) {
+		total = total + (nb * (bin[o] - 48));
+		o++;
+		nb /= 2;
+	}
+	return (total);
 }
 
 int	get_bytecode(char **arg, int fd)
@@ -44,20 +44,20 @@ int	get_bytecode(char **arg, int fd)
 	while (o != 8)
 		bytcode[o++] = '0';
 	bytcode[o] = '\0';
-	int ok = bin_to_dec(bytcode);
-	write(fd, &ok, 1);
+	int byte = bin_to_dec(bytcode);
+	write(fd, &byte, 1);
 
 }
 
-int is_bytecode(char *str)
+int	is_bytecode(char *str)
 {
-        char    *sp[5] = {"live", "fork", "lfork", "zjmp", NULL};
-        int     i = -1;
+	char    *sp[5] = {"live", "fork", "lfork", "zjmp", NULL};
+	int     i = -1;
 
-        while (++i != length_tab(sp)) {
-                if (my_strcmp(sp[i], str) == 0)
-                        return (1);
-        }
+	while (++i != length_tab(sp)) {
+		if (my_strcmp(sp[i], str) == 0)
+			return (1);
+	}
 	return (0);
 }
 
@@ -77,7 +77,7 @@ int	write_arg(char *arg, int fd, int *octet, char *ope)
 			*octet = 2;
 			nbr = be16toh(nbr);
 		}
-		else	
+		else
 			nbr = be32toh(nbr);
 	}
 	else {
@@ -115,22 +115,41 @@ int	write_op(char ***all, int fd, int i, int j)
 	}
 }
 
-int	change_label(char ***all, t_label *label)
+char	*index_o(char *str, t_label *label, int *olabel, int j)
+{
+	int	i = -1;
+	int nbr = 0;
+	static int k = -1;
+	char *tmp;
+
+	while (label->next != NULL) {
+		if (my_strcmp(label->label_name, str) == 0) {
+			nbr = ((olabel[++k] - label->octect) * -1);
+			tmp = my_getstr(nbr);
+			return (tmp);
+		}
+		label = label->next;
+	}
+}
+
+char	***change_label(char ***all, t_label *label, int *olabel)
 {
 	int i = -1;
 	int j = -1;
 
 	while (all[++i] != NULL) {
 		while (all[i][++j] != NULL) {
-			
+			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR) 
+				all[i][j] = index_o(all[i][j], label, olabel, j);
 		}
 		j = -1;
 	}
+	return (all);
 }
 
 int	write_file(char ***all, t_label *label, int fd, int *olabel)
 {
-	//change_label(all, label);
+	all = change_label(all, label, olabel);
 	write_op(all, fd, -1, -1);
 	return (0);
 }

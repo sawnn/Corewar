@@ -7,13 +7,23 @@
 
 #include "../include/my.h"
 
+char	*replace_label(char *str)
+{
+	char *tmp = my_strdup(str);
+	int	i = my_strlen(tmp);
+
+	tmp[i - 1] = '\0';
+	tmp = my_strcat("%:", tmp);
+	return (tmp);
+}
+
 t_label	*add_link(t_label *head, char *str, int i)
 {
 	t_label *elem = malloc(sizeof(t_label));
 
 	if (elem == NULL)
 		return (NULL);
-	elem->label_name = str;
+	elem->label_name = replace_label(str);
 	elem->octect = i;
 	elem->next = NULL;
 	if (head == NULL)

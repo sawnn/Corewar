@@ -10,7 +10,7 @@
 //ou be32toh > <endian.h>
 #define FLAGS_OPEN	O_RDWR | O_TRUNC | O_CREAT, 0644
 
-void	init_header(char **save, int fd)
+void	init_header(char **save, int fd, int size)
 {
 	header_t	header;
 	int	i = -1;
@@ -24,7 +24,7 @@ void	init_header(char **save, int fd)
 	while (name[++i])
 		header.prog_name[i] = name[i];
 	//header.prog_size = little_to_big_endian(0);
-	header.prog_size = be32toh(0);
+	header.prog_size = my_BIG_ENDIAN(size);
 	//header.prog_size = my_BIG_ENDIAN(0);
 	i = -1;
 	my_memset(header.comment, '\0', COMMENT_LENGTH + 1);
@@ -42,11 +42,12 @@ int	assembleur(char *file, char **save)
 	t_label	*label = NULL;
 	int	*olabel = malloc(sizeof(int) * 1);
 	int	k = 0;
+
+	
 	//octect += 8 ? //verifier cas speciaux
 	//olabel[1] = -1;
 	if (fd == -1 || all == NULL)
 		return (84);
-	init_header(save, fd);
 	while (all[++i] != NULL) {
 //		printf("octect ich turn = %d - str = %s\n", octect, all[i][0]);
 		if (is_label_to_save(all[i]) == 1) {
@@ -61,8 +62,10 @@ int	assembleur(char *file, char **save)
 			octect += find_octect_line(all[i], 0, &olabel);
 	}
 	olabel[k] = -1;
-	printf("OCTECT FINAL = %d\n", octect);
+//	printf("OCTECT FINAL = %d - bigendian = %d\n", octect, be32toh(octect));
 	//print_list(label);
-	print_int(olabel);
+	init_header(save, fd, octect);
+
+//	print_int(olabel);
 	write_file(all, label, fd, olabel);
 }
