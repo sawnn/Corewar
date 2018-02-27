@@ -31,11 +31,11 @@ char	*take_header_str(char *str)
 	return (&str[i + 1]);
 }
 
-void	*my_memset(char *str, int c, size_t n)
+void	*my_memset(char *str, char c, size_t n)
 {
 	int	i = 0;
 
-	for (i = 0; i != n; i++)
+	for (i = 0; i <= n; i++)
 		str[i] = c;
 	return (str);
 }

@@ -18,12 +18,12 @@ void	init_header(char **save, int fd, int size)
 	char	*comment = take_header_str(save[1]);
 
 	header.magic = little_to_big_endian(COREWAR_EXEC_MAGIC);
-	//header.magic = my_BIG_ENDIAN(COREWAR_EXEC_MAGIC);
+	header.prog_size = little_to_big_endian(size);
+//header.magic = my_BIG_ENDIAN(COREWAR_EXEC_MAGIC);
 	//header.magic = be32toh(COREWAR_EXEC_MAGIC);
 	my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 1);
 	while (name[++i])
 		header.prog_name[i] = name[i];
-	header.prog_size = little_to_big_endian(0);
 	//header.prog_size = my_BIG_ENDIAN(size);
 	//header.prog_size = my_BIG_ENDIAN(0);
 	i = -1;
