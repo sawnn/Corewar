@@ -5,23 +5,23 @@
 ## a
 ##
 
-SRC	=	src/main.c			\
-		src/utility.c			\
-		src/get_next_line.c		\
-		src/my_str_to_word_array.c	\
-		src/parseur.c			\
-		src/my_putnbr_base.c		\
-		src/init_op.c			\
-		src/error.c			\
-		src/utility_assem.c		\
-		src/assembleur.c		\
-		src/file.c			\
-		src/label.c			\
-		src/list.c			\
-		src/basic.c			\
-		src/label_bis.c			\
-		src/write_op.c			\
-		src/my_getstr.c
+SRC	=	asm/src/main.c			\
+		asm/src/utility.c		\
+		asm/src/get_next_line.c		\
+		asm/src/my_str_to_word_array.c	\
+		asm/src/parseur.c		\
+		asm/src/my_putnbr_base.c	\
+		asm/src/init_op.c		\
+		asm/src/error.c			\
+		asm/src/utility_assem.c		\
+		asm/src/assembleur.c		\
+		asm/src/file.c			\
+		asm/src/label.c			\
+		asm/src/list.c			\
+		asm/src/basic.c			\
+		asm/src/label_bis.c		\
+		asm/src/write_op.c		\
+		asm/src/my_getstr.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -29,7 +29,8 @@ NAME	=	asm/asm
 
 all:	$(NAME)
 
-CFLAGS	= -g3
+CFLAGS	= -I  include -g3
+
 $(NAME):	$(OBJ)
 	gcc -o $(NAME) $(OBJ) -g3
 
