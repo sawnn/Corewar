@@ -32,7 +32,7 @@ int	get_bytecode(char **arg, int fd)
 			bytcode[o++] = '0';
 			bytcode[o++] = '1';
 		}
-		else if (arg[i][0] == '%') {
+		else if (arg[i][0] == DIRECT_CHAR) {
 			bytcode[o++] = '1';
 			bytcode[o++] = '0';
 		}
@@ -70,7 +70,7 @@ int	write_arg(char *arg, int fd, int *octet, char *ope)
 		nbr = my_getnbr(&arg[1]);
 		*octet = 1;
 	}
-	else if (arg[i] == '%') {
+	else if (arg[i] == DIRECT_CHAR) {
 		nbr = my_getnbr(&arg[1]);
 		*octet = 4;
 		if (is_special_case(ope) == 1) {

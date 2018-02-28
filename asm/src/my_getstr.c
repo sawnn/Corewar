@@ -30,7 +30,7 @@ char	*my_getstr(int nb)
 
 	if ((tmp = malloc(sizeof(char) * (my_nblen(nb) + 1))) == NULL)
 		return (NULL);
-	tmp[0] = '%';
+	tmp[0] = DIRECT_CHAR;
 	i += 1;
 	if (nb < 0) {
 		nb = nb * (-1);

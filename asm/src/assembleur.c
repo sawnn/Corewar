@@ -54,7 +54,8 @@ int	assembleur(char *file, char **save)
 			olabel = realloc(olabel, sizeof(int) * (k + 1));
 		}
 		if (find_label(all[i][0]) == 1) {
-			label = add_link(label, all[i][0], octect);
+			if ((label = add_link(label, all[i][0], octect)) == NULL)
+				return (84);
 			octect += find_octect_line(all[i], 1, &olabel);
 		}
 		else
@@ -66,4 +67,5 @@ int	assembleur(char *file, char **save)
 	init_header(save, fd, octect);
 //	print_int(olabel);
 	write_file(all, label, fd, olabel);
+	return (0);
 }

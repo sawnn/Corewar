@@ -13,14 +13,14 @@
 # define MAX_ARGS_NUMBER	4     /* this may not be changed 2^*IND_SIZE */
 
 # define COMMENT_CHAR		'#'
-# define LABEL_CHAR		':'
-# define DIRECT_CHAR		'%'
+# define LABEL_CHAR		';'
+# define DIRECT_CHAR		'*'
 # define SEPARATOR_CHAR	','
 
 # define LABEL_CHARS		"abcdefghijklmnopqrstuvwxyz_0123456789"
 
-# define NAME_CMD_STRING	".name"
-# define COMMENT_CMD_STRING	".comment"
+# define NAME_CMD_STRING	".lol"
+# define COMMENT_CMD_STRING	".ntm"
 
 /*
 ** regs

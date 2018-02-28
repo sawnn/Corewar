@@ -33,12 +33,30 @@ int	check_name(t_op *ope, char **instruct, int bool, int i)
 	return (84);
 }
 
+int	is_label(char *label)
+{
+	int i = -1;
+	int j = -1;
+	int check = 0;
+
+	while (label[++i] != '\0') {
+		while (LABEL_CHARS[++j] != label[i] && LABEL_CHARS[j] != '\0');
+		if (LABEL_CHARS[j] != label[i])
+			return (84);
+		j = -1;
+	}
+
+	return (0);
+}
+
 int	put_label(t_op *ope, char *param)
 {
 	static int i = 2;
 	static int j = -1;
 	int o = 1;
 
+	if (is_label(&param[2]) == 84)
+		return (84);
 	if (j == -1)
 		ope->check_lab = malloc(sizeof(char*) * i++);
 	else
@@ -66,10 +84,9 @@ int	check_param(char *param, t_op *ope)
 		(nbr = my_getnbr(param)) > 16 || nbr < 1)
 			return (84);
 	}
-	else if (param[0] == '%') {
+	else if (param[0] == DIRECT_CHAR) {
 		if (param[1] == LABEL_CHAR)
 			return (put_label(ope, param));
-		//param[0] = '0';
 		if (my_isnum(&param[1]) == 84)
 			return (84);
 	}
@@ -113,7 +130,7 @@ int	check_ac(t_op *ope, char **instruct, int j, int k)
 	if (i != ope->ac[j] + 1)
 		return (84);
 	while (instruct[++k]) {
-		if (instruct[k][o] == '%')
+		if (instruct[k][o] == DIRECT_CHAR)
 			check = check_arg(ope, j, 'D', instruct[k]);
 		else if (instruct[k][o] == 'r')
 			check = check_arg(ope, j, 'R', instruct[k]);

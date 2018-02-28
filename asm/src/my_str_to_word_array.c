@@ -9,6 +9,16 @@
 
 #define SP SEPARATOR_CHAR
 
+int	my_strlenn(char *str)
+{
+	int i = -1;
+
+	while (str[++i] != '\0')
+		if (str[i] == COMMENT_CHAR)
+			return (i);
+	return (i);
+}
+
 int	calcule(char const *str)
 {
 	int i = 1;
@@ -20,6 +30,8 @@ int	calcule(char const *str)
 			o++;
 		if (o == 2)
 			o = 0;
+		//if (o != 1 && str[k] == COMMENT_CHAR)
+		//	return (i);
 		if (o != 1 && (str[k] < 33 || str[k] > 126 || str[k] == SP)) {
 			i++;
 		}
