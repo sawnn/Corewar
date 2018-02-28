@@ -40,7 +40,7 @@ clean:
 
 fclean:	clean
 	rm -f $(NAME)
-	rm -f ./champions/*.cor
+	rm -f ./*.cor
 
 re:	fclean all
 
