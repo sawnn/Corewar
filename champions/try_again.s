@@ -2,10 +2,10 @@
 .comment "izi"
 
 defense:
-	and %0, %0, r2
+	and %0, %0, r2 #mdr  r
 	zjmp %:stg
 	and %0, %0, r2
-	zjmp %:defense
+	zjmp %:defense   #a êee 
 	
 stg:
 	ld %1, r3

@@ -126,8 +126,8 @@ char	*index_o(char *str, t_label *label, int *olabel, int j)
 	while (tmp2 != NULL) {
 		if (my_strcmp(tmp2->label_name, str) == 0) {
 			nbr = ((olabel[++k] - tmp2->octect) * -1);
-			tmp = my_getstr(nbr);
-			return (tmp);
+			str = my_strdup(my_getstr(nbr));
+			return (str);
 		}
 		tmp2 = tmp2->next;
 	}

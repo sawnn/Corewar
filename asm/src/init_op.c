@@ -84,13 +84,13 @@ int	pars_head(char **head, int i, int j)
 	if (head[1][0] != '"' || head[1][j - 1] != '"')
 		return (84);
 	if (i == 0) {
-		if (my_strcmp(".name", head[0]) != 0)
+		if (my_strcmp(NAME_CMD_STRING, head[0]) != 0)
 			return (84);
 		else if (j - 2 > 128)
 			return (84);
 	}
 	else {
-		if (my_strcmp(".comment", head[0]) != 0)
+		if (my_strcmp(COMMENT_CMD_STRING, head[0]) != 0)
 			return (84);
 		else if (j - 2 > 2048)
 			return (84);

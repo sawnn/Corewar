@@ -60,7 +60,7 @@ int	put_label(t_op *ope, char *param, int nbr, int o)
 		ope->check_lab = malloc(sizeof(char*) * i++);
 	else
 		ope->check_lab = realloc(ope->check_lab, sizeof(char*) * i++);
-	ope->check_lab[++j] = malloc(sizeof(char) * my_strlen(param) - 1);
+	ope->check_lab[++j] = malloc(sizeof(char) * my_strlen(param));
 	if (ope->check_lab[j] == NULL)
 		return (84);
 	while (param[++o] != '\0')
