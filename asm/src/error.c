@@ -49,13 +49,12 @@ int	is_label(char *label)
 	return (0);
 }
 
-int	put_label(t_op *ope, char *param)
+int	put_label(t_op *ope, char *param, int nbr, int o)
 {
 	static int i = 2;
 	static int j = -1;
-	int o = 1;
 
-	if (is_label(&param[2]) == 84)
+	if (is_label(&param[nbr]) == 84)
 		return (84);
 	if (j == -1)
 		ope->check_lab = malloc(sizeof(char*) * i++);
@@ -65,8 +64,8 @@ int	put_label(t_op *ope, char *param)
 	if (ope->check_lab[j] == NULL)
 		return (84);
 	while (param[++o] != '\0')
-		ope->check_lab[j][o - 2] = param[o];
-	ope->check_lab[j][o - 2] = '\0';
+		ope->check_lab[j][o - nbr] = param[o];
+	ope->check_lab[j][o - nbr] = '\0';
 	ope->check_lab[j + 1] = NULL;
 	ope->isempty = 1;
 	return (1);
@@ -86,10 +85,12 @@ int	check_param(char *param, t_op *ope)
 	}
 	else if (param[0] == DIRECT_CHAR) {
 		if (param[1] == LABEL_CHAR)
-			return (put_label(ope, param));
+			return (put_label(ope, param, 2, 1));
 		if (my_isnum(&param[1]) == 84)
 			return (84);
 	}
+	else if (param[0] == LABEL_CHAR)
+		return (put_label(ope, param, 1, 0));
 	else if (my_isnum(param) == 84)
 		return (84);
 	return (1);

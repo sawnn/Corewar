@@ -9,14 +9,16 @@
 
 #define SP SEPARATOR_CHAR
 
-int	my_strlenn(char *str)
+char	*check_comment(char *str)
 {
 	int i = -1;
 
 	while (str[++i] != '\0')
-		if (str[i] == COMMENT_CHAR)
-			return (i);
-	return (i);
+		if (str[i] == COMMENT_CHAR) {
+			str[i] = '\0';
+			return (str);
+		}
+	return (str);
 }
 
 int	calcule(char const *str)
@@ -73,6 +75,7 @@ char	**my_str_to_word_array(char *str)
 
 	if (str == NULL)
 		return (NULL);
+	str = check_comment(str);
 	pick = malloc(sizeof(char) * (my_strlen(str) + 1));
 	bac = malloc(sizeof(char*) * (calcule(str) + (sizeof(char*) * 2)));
 	if (bac == NULL || pick == NULL)

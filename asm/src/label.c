@@ -15,6 +15,8 @@ int	which_arg_is(char *str)
 		return (2);
 	if (str[0] >= '0' && str[0] <= '9' || str[1] == LABEL_CHAR)
 		return (3);
+	if (str[0] == LABEL_CHAR)
+		return (3);
 	return (0);
 }
 
@@ -57,6 +59,8 @@ int	is_label_to_save(char **tab)
 		if ((tab[i][0] == DIRECT_CHAR) && (tab[i][1] == LABEL_CHAR)) {
 			return (1);
 		}
+		else if (tab[i][0] == LABEL_CHAR)
+			return (1);
 	}
 	return (0);
 }

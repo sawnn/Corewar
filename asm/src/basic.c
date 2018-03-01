@@ -24,6 +24,6 @@ int	my_strlenchar(char *str, char c)
 {
 	int	i = -1;
 
-	while (str[++i] != c);
+	while (str[++i] != c && str[i] != '\0');
 	return (i);
 }
