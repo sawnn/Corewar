@@ -26,16 +26,40 @@ char	*take_header_str(char *str)
 	int	i = -1;
 	int	j = my_strlen(str);
 
+//	printf("%d\n", j);
 	str[j - 1] = '\0';
 	while (str[++i] != 34);
 	return (&str[i + 1]);
 }
 
-void	*my_memset(char *str, char c, size_t n)
+void	*my_memset_name(header_t *header, char c, size_t n)
 {
 	int	i = 0;
 
-	for (i = 0; i <= n; i++)
-		str[i] = c;
-	return (str);
+	for (i = 0; i <= n; i++) {
+		header->prog_name[i] = c;
+	}
+	//return (*str);
 }
+
+void	*my_memset_com(header_t *header, char c, size_t n)
+{
+	int	i = 0;
+
+	for (i = 0; i <= n; i++) {
+		header->comment[i] = c;
+	}
+	//return (*str);
+}
+
+void    *my_memset(char *str, char c, size_t n)
+{
+        int     i = 0;
+
+        for (i = 0; i <= n; i++) {
+                str[i] = c;
+        }
+        return (str);                                                                                
+}
+
+

@@ -32,8 +32,6 @@ int	calcule(char const *str)
 			o++;
 		if (o == 2)
 			o = 0;
-		//if (o != 1 && str[k] == COMMENT_CHAR)
-		//	return (i);
 		if (o != 1 && (str[k] < 33 || str[k] > 126 || str[k] == SP)) {
 			i++;
 		}
