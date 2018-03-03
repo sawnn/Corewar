@@ -3,7 +3,7 @@
 .name "ok"
 .comment "ok"
 
-ntm:	live %4   #lol
+ntm:	live %:toto   #lol
 	
 toto:	st r1, :toto   #ùdrrr    ez 
 	st r2, :toto

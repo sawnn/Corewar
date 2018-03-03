@@ -1,3 +1,5 @@
+#lol
+#lol
 .name "try_again"
 .comment "izi"
 
@@ -26,7 +28,7 @@ stg:
 	fork %:prep
 	and %0, %0, r2
 
-	st r7, 507
+	st r7, :stg
 	st r6, 500
 
 	st r3, 490

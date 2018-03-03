@@ -11,11 +11,9 @@ int	which_arg_is(char *str)
 {
 	if (str[0] == 'r')
 		return (1);
-	if (str[0] == DIRECT_CHAR && str[1] != LABEL_CHAR)
+	if (str[0] == DIRECT_CHAR)
 		return (2);
-	if (str[0] >= '0' && str[0] <= '9' || str[1] == LABEL_CHAR)
-		return (3);
-	if (str[0] == LABEL_CHAR)
+	if (str[0] >= '0' && str[0] <= '9' || str[0] == LABEL_CHAR)
 		return (3);
 	return (0);
 }
