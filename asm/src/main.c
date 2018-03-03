@@ -36,6 +36,6 @@ int	main(int ac, char **av)
 	//faudra free le tableau instruc et t_op *ope)
 	if (save[1] == NULL)
 		return (84);
-	return (assembleur(av[1], save));
+	assembleur(av[1], save);
 	return (0);
 }

@@ -32,7 +32,7 @@ int	get_bytecode(char **arg, int fd)
 			bytcode[o++] = '0';
 			bytcode[o++] = '1';
 		}
-		else if (arg[i][0] == DIRECT_CHAR) {
+		else if (arg[i][0] == '%') {
 			bytcode[o++] = '1';
 			bytcode[o++] = '0';
 		}
@@ -70,7 +70,7 @@ int	write_arg(char *arg, int fd, int *octet, char *ope)
 		nbr = my_getnbr(&arg[1]);
 		*octet = 1;
 	}
-	else if (arg[i] == DIRECT_CHAR) {
+	else if (arg[i] == '%') {
 		nbr = my_getnbr(&arg[1]);
 		*octet = 4;
 		if (is_special_case(ope) == 1) {
@@ -126,8 +126,8 @@ char	*index_o(char *str, t_label *label, int *olabel, int j)
 	while (tmp2 != NULL) {
 		if (my_strcmp(tmp2->label_name, str) == 0) {
 			nbr = ((olabel[++k] - tmp2->octect) * -1);
-			str = my_strdup(my_getstr(nbr));
-			return (str);
+			tmp = my_getstr(nbr);
+			return (tmp);
 		}
 		tmp2 = tmp2->next;
 	}
@@ -137,20 +137,11 @@ char	***change_label(char ***all, t_label *label, int *olabel)
 {
 	int i = -1;
 	int j = -1;
-	char *tmp = malloc(sizeof(char) * 2);
 
-	tmp[0] = DIRECT_CHAR;
-	tmp[1] = '\0';
 	while (all[++i] != NULL) {
 		while (all[i][++j] != NULL) {
-			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR)
+			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR) {
 				all[i][j] = index_o(all[i][j], label, olabel, j);
-			else if (all[i][j][0] == LABEL_CHAR) {
-				tmp = my_strcat(tmp, all[i][j]);
-				tmp = index_o(tmp, label, olabel, j);
-				all[i][j] = my_strdup(&tmp[1]);
-					tmp[0] = DIRECT_CHAR;
-					tmp[1] = '\0';
 			}
 			
 		}

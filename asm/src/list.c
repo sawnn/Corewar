@@ -11,15 +11,9 @@ char	*replace_label(char *str)
 {
 	char *tmp = my_strdup(str);
 	int	i = my_strlen(tmp);
-	char *op = malloc(sizeof(char) * 3);
 
-	if (op == NULL)
-		return (NULL);
-	op[0] = DIRECT_CHAR;
-	op[1] = LABEL_CHAR;
-	op[2] = '\0';
 	tmp[i - 1] = '\0';
-	tmp = my_strcat(op, tmp);
+	tmp = my_strcat("%:", tmp);
 	return (tmp);
 }
 
@@ -29,8 +23,7 @@ t_label	*add_link(t_label *head, char *str, int i)
 
 	if (elem == NULL)
 		return (NULL);
-	if ((elem->label_name = replace_label(str)) == NULL)
-		return (NULL);
+	elem->label_name = replace_label(str);
 	elem->octect = i;
 	elem->next = NULL;
 	if (head == NULL)

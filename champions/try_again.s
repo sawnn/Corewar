@@ -1,13 +1,11 @@
-#lol
-#lol
 .name "try_again"
 .comment "izi"
 
 defense:
-	and %0, %0, r2 #mdr  r
+	and %0, %0, r2
 	zjmp %:stg
 	and %0, %0, r2
-	zjmp %:defense   #a êee 
+	zjmp %:defense
 	
 stg:
 	ld %1, r3
@@ -28,7 +26,7 @@ stg:
 	fork %:prep
 	and %0, %0, r2
 
-	st r7, :stg
+	st r7, 507
 	st r6, 500
 
 	st r3, 490
