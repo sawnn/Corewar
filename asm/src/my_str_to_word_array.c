@@ -14,7 +14,7 @@ char	*check_comment(char *str)
 	int i = -1;
 
 	while (str[++i] != '\0')
-		if (str[i] == COMMENT_CHAR) {
+		if (str[i] == '#') {
 			str[i] = '\0';
 			return (str);
 		}
