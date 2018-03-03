@@ -1,3 +1,5 @@
+#lol
+#lol
 .name "ok"
 .comment "ok"
 
@@ -9,3 +11,4 @@ toto:	st r1, :toto   #ùdrrr    ez
 	st r3, :toto
 	#éez
 	#zfd
+#loooomlmmmmm
