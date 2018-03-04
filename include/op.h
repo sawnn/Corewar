@@ -35,7 +35,7 @@
 typedef char    args_type_t;
 
 # define T_REG		1	/* register */
-# define T_DIR		2	/* direct  (ld  #1,r1  put 1 into r1) */
+# define T_DIR		2	/* direct  (ld  %1,r1  put 1 into r1) */
 # define T_IND		4	/* indirect always relative
 				    ( ld 1,r1 put what's in the address (1+pc)
 				   into r1 (4 bytes )) */

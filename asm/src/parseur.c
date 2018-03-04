@@ -29,11 +29,19 @@ int	init_struct(t_op *ope)
 	ope->isempty = 0;
 }
 
-char	**check_label(char **save, t_op ope)
+char	**check_label(char **save, t_op ope, int i, int j)
 {
-	int i = -1;
-	int j = -1;
+	t_op check = ope;
 
+	while (ope.label[++j] != NULL) {
+		while (check.label[++i] != NULL) {
+			if (i != j && my_strcmp(ope.label[j], check.label[i]) == 0)
+				return (NULL);
+		}
+		i = -1;
+	}
+	i = -1;
+	j = -1;
 	while (ope.isempty == 1 && ope.check_lab[++i] != NULL) {
 		while (ope.label[++j] != NULL
 			&& my_strcmp(ope.label[j], ope.check_lab[i]) != 0);
@@ -65,5 +73,5 @@ char	**parseur(char *str, char *str2, int j, char *s)
 		}
 	}
 	save[j] = NULL;
-	return (check_label(save, ope));
+	return (check_label(save, ope, -1, -1));
 }

@@ -12,6 +12,8 @@ int	my_nblen(int nb)
 	int     x = 1;
 	int     i = 0;
 
+	if (nb < 0)
+		nb = nb * -1;
 	while ((nb / x) >= 10) {
 		x = x * 10;
 	}
@@ -28,9 +30,9 @@ char	*my_getstr(int nb)
 	int	i = -1;
 	char	*tmp = NULL;
 
-	if ((tmp = malloc(sizeof(char) * (my_nblen(nb) + 1))) == NULL)
+	if ((tmp = malloc(sizeof(char) * (my_nblen(nb) + 3))) == NULL)
 		return (NULL);
-	tmp[0] = '%';
+	tmp[0] = DIRECT_CHAR;
 	i += 1;
 	if (nb < 0) {
 		nb = nb * (-1);
@@ -43,6 +45,6 @@ char	*my_getstr(int nb)
 		tmp[++i] = (((nb / x) % 10 + 48));
 		x /= 10;
 	}
-	tmp[i + 1] = '\0';
+	tmp[i + 1] = '\0';	
 	return (tmp);
 }
