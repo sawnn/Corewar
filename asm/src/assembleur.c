@@ -16,29 +16,20 @@ void	init_header(char **save, int fd, int size)
 	int	i = -1;
 	char	*name = take_header_str(save[0]);
 	char	*comment = take_header_str(save[1]);
-	
-	memset(&header, 0, sizeof(header_t));
+
 	header.magic = little_to_big_endian(COREWAR_EXEC_MAGIC);
 	header.prog_size = little_to_big_endian(size);
 //header.magic = my_BIG_ENDIAN(COREWAR_EXEC_MAGIC);
-//	header.magic = be32toh(COREWAR_EXEC_MAGIC);
-//	header.prog_size = be32toh(size);
+	//header.magic = be32toh(COREWAR_EXEC_MAGIC);
 	my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 1);
-	
 	while (name[++i])
 		header.prog_name[i] = name[i];
-//	header.prog_name[i] = '\0';
 	//header.prog_size = my_BIG_ENDIAN(size);
 	//header.prog_size = my_BIG_ENDIAN(0);
 	i = -1;
 	my_memset(header.comment, '\0', COMMENT_LENGTH + 1);
 	while (comment[++i])
 		header.comment[i] = comment[i];
-	//printf("%d\n", my_strlen(header.comment));
-	//while (headre = comm ++i)
-	//header.comment[i] = '\0';
-	//printf("name = %s, comment = %s %d\n", header.prog_name, header.comment, i);
-	//
 	write(fd, &header, sizeof(header_t));
 }
 
@@ -63,8 +54,7 @@ int	assembleur(char *file, char **save)
 			olabel = realloc(olabel, sizeof(int) * (k + 1));
 		}
 		if (find_label(all[i][0]) == 1) {
-			if ((label = add_link(label, all[i][0], octect)) == NULL)
-				return (84);
+			label = add_link(label, all[i][0], octect);
 			octect += find_octect_line(all[i], 1, &olabel);
 		}
 		else
@@ -76,5 +66,4 @@ int	assembleur(char *file, char **save)
 	init_header(save, fd, octect);
 //	print_int(olabel);
 	write_file(all, label, fd, olabel);
-	return (0);
 }

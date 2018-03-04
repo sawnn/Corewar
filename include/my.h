@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include "op.h"
-#include <string.h>
 //#define	PARAM int save, int j
 typedef	struct	s_op {
 	char	**arg;
@@ -81,8 +80,6 @@ void	init_header(char **, int, int);
 
 /*UTILITY_ASSEM.C*/
 char	*take_header_str(char *);
-void	*my_memset_com(header_t *, char, size_t);
-void	*my_memset_name(header_t *, char, size_t);
 void	*my_memset(char *, char, size_t);
 char	***fill_all_tab(char ***, char **);
 
