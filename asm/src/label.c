@@ -57,8 +57,6 @@ int	is_label_to_save(char **tab)
 		if ((tab[i][0] == DIRECT_CHAR) && (tab[i][1] == LABEL_CHAR)) {
 			return (1);
 		}
-		else if (tab[i][0] == LABEL_CHAR)
-			return (1);
 	}
 	return (0);
 }

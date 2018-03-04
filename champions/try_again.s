@@ -26,10 +26,10 @@ stg:
 	fork %:prep
 	and %0, %0, r2
 
-	st r7, :stg
-	st r6, :live
+	st r7, 507
+	st r6, 500
 
-	st r3, :loop
+	st r3, 490
 	st r1, 489
 
 	st r3, 400
