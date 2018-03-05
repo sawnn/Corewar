@@ -1,5 +1,5 @@
 .name "roller"
-.comment "oui"
+.comment "fdp"
 	
 start:
 	sti r1, %:live, %1
@@ -11,4 +11,4 @@ preend:
 	xor %1, %1, r16
 	zjmp %:start
 
-lol:	
+

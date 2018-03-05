@@ -133,21 +133,30 @@ char	*index_o(char *str, t_label *label, int *olabel, int j)
 	}
 }
 
-char	***change_label(char ***all, t_label *label, int *olabel)
+char    ***change_label(char ***all, t_label *label, int *olabel)
 {
-	int i = -1;
-	int j = -1;
+        int i = -1;
+        int j = -1;
+        char *tmp = malloc(sizeof(char) * 2);
 
-	while (all[++i] != NULL) {
-		while (all[i][++j] != NULL) {
-			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR) {
-				all[i][j] = index_o(all[i][j], label, olabel, j);
-			}
-			
+        tmp[0] = DIRECT_CHAR;
+	tmp[1] = '\0';
+        while (all[++i] != NULL) {
+                while (all[i][++j] != NULL) {
+                        if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR)
+                                all[i][j] = index_o(all[i][j], label, olabel, j);
+			else if (all[i][j][0] == LABEL_CHAR) {
+                                tmp = my_strcat(tmp, all[i][j]);
+		                tmp = index_o(tmp, label, olabel, j);
+                                all[i][j] = my_strdup(&tmp[1]);
+                                        tmp[0] = DIRECT_CHAR;
+                                        tmp[1] = '\0';
+                        }
+
 		}
-		j = -1;
-	}
-	return (all);
+                j = -1;
+        }
+        return (all);
 }
 
 int	write_file(char ***all, t_label *label, int fd, int *olabel)

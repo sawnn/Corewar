@@ -1,5 +1,5 @@
 .name "roller"
-.comment "oui"
+.comment "fdp"
 	
 start:
 	sti r1, %:live, %1

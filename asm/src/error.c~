@@ -21,12 +21,11 @@ int	check_name(t_op *ope, char **instruct, int bool, int i)
 		ope->label[j][0] = '\0';
 		ope->label[j] = my_strdup(instruct[0]);
 		ope->label[j][my_strlen(instruct[0]) - 1] = '\0';
-		ope->label[j + 1] = NULL;		
 		bool = 1;
 		if (instruct[1] == NULL)
 			return (-1);
 	}
-
+	ope->label[j + 1] = NULL;
 	while (ope->tab[++i] != NULL) {
 		if (my_strcmp(instruct[bool], ope->tab[i]) == 0)
 			return (i);
