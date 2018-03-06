@@ -85,11 +85,3 @@ int	find_octect_line(char **tab, int pos, int **olabel)
 	return (octect);
 }
 
-void	print_int(int *olabel)
-{
-	int	i = -1;
-
-	while (olabel[++i] != -1) {
-		printf("int = %d\n", olabel[i]);
-	}
-}
