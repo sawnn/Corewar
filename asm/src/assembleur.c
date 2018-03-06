@@ -61,6 +61,7 @@ int	assembleur(char *file, char **save)
 		else
 			octect += find_octect_line(all[i], 0, &olabel);
 	}
+	
 	olabel[k] = -1;
 //	printf("OCTECT FINAL = %d - bigendian = %d\n", octect, be32toh(octect));
 //	print_list(label);

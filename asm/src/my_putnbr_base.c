@@ -16,9 +16,9 @@ int	my_getnbr(char *str)
 		i = i + 1;
 	while (str[i]) {
 		j = j + str[i++] - 48;
-		j = j * 10;
+		if (str[i])
+			j = j * 10;
 	}
-	j = j / 10;
 	if (str[0] == '-')
 		j = j * -1;
 	return (j);

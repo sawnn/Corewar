@@ -43,7 +43,7 @@ int	my_isnum(char *);
 int	my_strlenchar(char *, char);
 void	my_putstr(char *, int);
 void	print_tab(char **);
-int	strlen_slash(char *);
+int	strlen_check(char *, char);
 
 /*PARSEUR.C*/
 char	**parseur(char *, char *, int, char *);

@@ -9,9 +9,9 @@
 
 char	*find_file_name(char *str)
 {
-	int	i = strlen_check(str, '.');
+	int	i = my_strlen_sl(str, '.');
 	char	*file = malloc(sizeof(char) * i + 1);
-	int	j = strlen_check(str, '/');
+	int	j = strlen_slash(str);
 
 	if (j == -1) {
 		if (!str)
@@ -21,7 +21,7 @@ char	*find_file_name(char *str)
 	}
 	file[0] = '\0';
 	str = my_strdup(&str[j + 1]);
-	i = strlen_check(str, '.');
+	i = my_strlenchar(str, '.');
 	file = malloc(sizeof(char) * (i + 1));
 	file[0] = '\0';
 	str[i] = '\0';

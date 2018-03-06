@@ -28,12 +28,12 @@ int	my_strlenchar(char *str, char c)
 	return (i);
 }
 
-int	strlen_slash(char *str)
+int	strlen_check(char *str, char c)
 {
 	int i = -1;
 	int check = -1;
 	while (str[++i] != '\0')
-		if (str[i] == '/')
+		if (str[i] == c)
 			check = i;
 	return (check);
 }
