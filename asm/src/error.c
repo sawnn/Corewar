@@ -26,7 +26,7 @@ int	check_name(t_op *ope, char **instruct, int bool, int i)
 		if (instruct[1] == NULL)
 			return (-1);
 	}
-
+//	ope->label[j + 1] = NULL;
 	while (ope->tab[++i] != NULL) {
 		if (my_strcmp(instruct[bool], ope->tab[i]) == 0)
 			return (i);
@@ -87,8 +87,8 @@ int	check_param(char *param, t_op *ope)
 		if (my_isnum(&param[1]) == 84)
 			return (84);
 	}
-	else if (param[0] == ':')
-		return (put_label(ope, param, 1, 0));
+	//else if (param[0] == ':')
+	//	return (put_label(ope, param, 1, 0));
 	else if (my_isnum(param) == 84)
 		return (84);
 	return (1);

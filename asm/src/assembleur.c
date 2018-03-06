@@ -17,6 +17,7 @@ void	init_header(char **save, int fd, int size)
 	char	*name = take_header_str(save[0]);
 	char	*comment = take_header_str(save[1]);
 
+	memset(&header, 0, sizeof(header_t));
 	header.magic = little_to_big_endian(COREWAR_EXEC_MAGIC);
 	header.prog_size = little_to_big_endian(size);
 //header.magic = my_BIG_ENDIAN(COREWAR_EXEC_MAGIC);

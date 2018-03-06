@@ -33,6 +33,8 @@ char    **check_label(char **save, t_op ope, int i, int j)
 {
         t_op check = ope;
 
+	if (save[1] == NULL || save[2] == NULL)
+		return (save);
         while (ope.label[++j] != NULL) {
                 while (check.label[++i] != NULL) {
                         if (i != j && my_strcmp(ope.label[j], check.label[i]) == 0)

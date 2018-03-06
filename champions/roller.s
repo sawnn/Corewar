@@ -1,14 +1,6 @@
-.name "roller"
-.comment "oui"
-	
-start:
-	sti r1, %:live, %1
+.name "oui" #mdr
+.comment "lol"	#loooll
 
-live:
-	live %0
-
-preend:
-	xor %1, %1, r16
-	zjmp %:start
-
-lol:	
+lol:	live %2
+	zjmp %12 #oui
+	fork %:lol
