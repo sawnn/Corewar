@@ -25,7 +25,7 @@ int	error(int ac, char **av)
 	i = strlen_check(av[1], '.');
 	if (i == -1)
 		return (84);
-	if (my_strcmp(&av[i][i], ".s") != 0) {
+	if (my_strcmp(&av[1][i], ".s") != 0) {
 		return (84);
 	}
 	return (0);
