@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <string.h>
 #include "op.h"
 //#define	PARAM int save, int j
 typedef	struct	s_op {
