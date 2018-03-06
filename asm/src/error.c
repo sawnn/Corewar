@@ -7,33 +7,6 @@
 
 #include "../include/my.h"
 
-int	check_name(t_op *ope, char **instruct, int bool, int i)
-{
-	static int o = 2;
-	static int j = -1;
-
-	ope->label = j == -1 ? malloc(sizeof(char*) * o) : ope->label;
-	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR) {
-		ope->label = realloc(ope->label, sizeof(char *) * o++);
-		ope->label[++j] = malloc(sizeof(char) * my_strlen(instruct[0]));
-		if (ope->label[j] == NULL)
-			return (84);
-		ope->label[j][0] = '\0';
-		ope->label[j] = my_strdup(instruct[0]);
-		ope->label[j][my_strlen(instruct[0]) - 1] = '\0';
-		ope->label[j + 1] = NULL;		
-		bool = 1;
-		if (instruct[1] == NULL)
-			return (-1);
-	}
-//	ope->label[j + 1] = NULL;
-	while (ope->tab[++i] != NULL) {
-		if (my_strcmp(instruct[bool], ope->tab[i]) == 0)
-			return (i);
-	}
-	return (84);
-}
-
 int	is_label(char *label)
 {
 	int i = -1;
@@ -49,11 +22,43 @@ int	is_label(char *label)
 	return (0);
 }
 
+int	check_name(t_op *ope, char **instruct, int bool, int i)
+{
+	static int o = 2;
+	static int j = -1;
+
+	ope->label = j == -1 ? malloc(sizeof(char*) * o) : ope->label;
+	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR) {
+		ope->label = realloc(ope->label, sizeof(char *) * o++);
+		ope->label[++j] = malloc(sizeof(char) * my_strlen(instruct[0]));
+		if (ope->label[j] == NULL)
+			return (84);
+		ope->label[j][0] = '\0';
+		ope->label[j] = my_strdup(instruct[0]);
+		ope->label[j][my_strlen(instruct[0]) - 1] = '\0';
+		if (is_label(ope->label[j]) == 84)
+			return (84);
+		ope->label[j + 1] = NULL;		
+		bool = 1;
+		if (instruct[1] == NULL)
+			return (-1);
+	}
+//	ope->label[j + 1] = NULL;
+	while (ope->tab[++i] != NULL) {
+		if (my_strcmp(instruct[bool], ope->tab[i]) == 0)
+			return (i);
+	}
+	return (84);
+}
+
+
 int	put_label(t_op *ope, char *param, int nbr, int o)
 {
 	static int i = 2;
 	static int j = -1;
 
+//	if (is_label(&param[nbr]) == 84)
+//		return (84);
 	if (j == -1)
 		ope->check_lab = malloc(sizeof(char*) * i++);
 	else
