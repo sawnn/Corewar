@@ -1,9 +1,0 @@
-/*
-** EPITECH PROJECT, 2018
-** vm
-** File description:
-** gaspacho andalou
-*/
-
-#include "my.h"
-#include "op.h"

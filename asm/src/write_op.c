@@ -136,7 +136,7 @@ char	*index_o(char *str, t_label *label, int *olabel, int j)
 char    ***change_label(char ***all, t_label *label, int *olabel)
 {
         int i = -1;
-        int j = -1;
+        int j = 0;
         char *tmp = malloc(sizeof(char) * 2);
 
         tmp[0] = DIRECT_CHAR;

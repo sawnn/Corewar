@@ -11,9 +11,9 @@ begin:
 		lld	%0, r6
 		lld	%:repeat, r4
 		sti	r4, %:live, r5
-		add	r4, %4, r4
-		add	r5, %4, r5
-		add	r6, %4, r6
+		add	r4, r4, r4
+		add	r5, r4, r5
+		add	r6, r4, r6
 
 repeat:
 		sti 	r1, r2, %:live
