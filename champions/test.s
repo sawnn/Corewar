@@ -1,5 +1,2 @@
-.name "ok"
-.comment "ok"
-
-:
-	live %2	
+.name "Label filled champion"
+.comment "Le comment"

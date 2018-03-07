@@ -92,8 +92,8 @@ int	check_param(char *param, t_op *ope)
 		if (my_isnum(&param[1]) == 84)
 			return (84);
 	}
-	//else if (param[0] == ':')
-	//	return (put_label(ope, param, 1, 0));
+	else if (param[0] == ':')
+		return (put_label(ope, param, 1, 0));
 	else if (my_isnum(param) == 84)
 		return (84);
 	return (1);
