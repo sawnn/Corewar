@@ -32,7 +32,7 @@ char	*take_header_str(char *str)
 	return (&tmp[1][i + 1]);
 }
 
-void	*my_memset(char *str, char c, size_t n)
+void	*my_memset(char *str, char c, int n)
 {
 	int	i = 0;
 

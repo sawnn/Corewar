@@ -7,6 +7,23 @@
 
 #include "../include/my.h"
 
+int	check_error(t_op *ope, char **instruct)
+{
+	int i = -1;
+	int j = 0;
+	int k = 0;
+
+	if ((i = check_name(ope, instruct, 0, -1)) == 84)
+		return (84);
+	if (i == -1)
+		return (i);
+	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR)
+		k = 1;
+	if ((i = check_ac(ope, instruct, i, k)) == 84)
+		return (84);
+	return (i);
+}
+
 int	send_op(t_op ope, char **instruc)
 {
 	int	i = -1;
@@ -37,11 +54,11 @@ char	**check_label(char **save, t_op ope, int i, int j)
 		return (save);
 	while (ope.label[++j] != NULL) {
 		while (check.label[++i] != NULL)
-			if (i != j && my_strcmp(ope.label[j], check.label[i]) == 0)
+			if (i != j
+			&& my_strcmp(ope.label[j], check.label[i]) == 0)
 				return (NULL);
 		i = -1;
 	}
-	i = -1;
 	j = -1;
 	while (ope.isempty == 1 && ope.check_lab[++i] != NULL) {
 		while (ope.label[++j] != NULL

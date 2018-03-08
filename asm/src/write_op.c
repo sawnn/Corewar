@@ -7,60 +7,6 @@
 
 #include "../include/my.h"
 
-int	bin_to_dec(char *bin)
-{
-	int total = 0;
-	int nb = 128;
-	int o = 0;
-
-	while (o < 8) {
-		total = total + (nb * (bin[o] - 48));
-		o++;
-		nb /= 2;
-	}
-	return (total);
-}
-
-int	get_bytecode(char **arg, int fd)
-{
-	int i = -1;
-	int o = 0;
-	char bytcode[8];
-
-	while (arg[++i] != NULL) {
-		if (arg[i][0] == 'r') {
-			bytcode[o++] = '0';
-			bytcode[o++] = '1';
-		}
-		else if (arg[i][0] == '%') {
-			bytcode[o++] = '1';
-			bytcode[o++] = '0';
-		}
-		else {
-			bytcode[o++] = '1';
-			bytcode[o++] = '1';
-		}
-	}
-	while (o != 8)
-		bytcode[o++] = '0';
-	bytcode[o] = '\0';
-	int byte = bin_to_dec(bytcode);
-	write(fd, &byte, 1);
-
-}
-
-int	is_bytecode(char *str)
-{
-	char    *sp[5] = {"live", "fork", "lfork", "zjmp", NULL};
-	int     i = -1;
-
-	while (++i != length_tab(sp)) {
-		if (my_strcmp(sp[i], str) == 0)
-			return (1);
-	}
-	return (0);
-}
-
 int	write_arg(char *arg, int fd, int *octet, char *ope)
 {
 	int i = -1;
@@ -133,30 +79,29 @@ char	*index_o(char *str, t_label *label, int *olabel, int j)
 	}
 }
 
-char    ***change_label(char ***all, t_label *label, int *olabel)
+char	***change_label(char ***all, t_label *label, int *olabel)
 {
-        int i = -1;
-        int j = 0;
-        char *tmp = malloc(sizeof(char) * 2);
+	int i = -1;
+	int j = 0;
+	char *tmp = malloc(sizeof(char) * 2);
 
-        tmp[0] = DIRECT_CHAR;
+	tmp[0] = DIRECT_CHAR;
 	tmp[1] = '\0';
-        while (all[++i] != NULL) {
-                while (all[i][++j] != NULL) {
-                        if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR)
-                                all[i][j] = index_o(all[i][j], label, olabel, j);
+	while (all[++i] != NULL) {
+		while (all[i][++j] != NULL) {
+			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR)
+				all[i][j] = index_o(all[i][j], label, olabel, j);
 			else if (all[i][j][0] == LABEL_CHAR) {
-                                tmp = my_strcat(tmp, all[i][j]);
-		                tmp = index_o(tmp, label, olabel, j);
-                                all[i][j] = my_strdup(&tmp[1]);
-                                        tmp[0] = DIRECT_CHAR;
-                                        tmp[1] = '\0';
-                        }
-
+				tmp = my_strcat(tmp, all[i][j]);
+				tmp = index_o(tmp, label, olabel, j);
+				all[i][j] = my_strdup(&tmp[1]);
+				tmp[0] = DIRECT_CHAR;
+				tmp[1] = '\0';
+			}
 		}
-                j = -1;
-        }
-        return (all);
+		j = -1;
+	}
+	return (all);
 }
 
 int	write_file(char ***all, t_label *label, int fd, int *olabel)

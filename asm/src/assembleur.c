@@ -6,9 +6,28 @@
 */
 
 #include "../include/my.h"
-#define	my_BIG_ENDIAN(num) ((num>>24)) | ((num<<8)&0xff0000) | ((num>>8)&0xff00) | ((num<<24)&0xff000000)
-//ou be32toh > <endian.h>
-#define FLAGS_OPEN	O_RDWR | O_TRUNC | O_CREAT, 0644
+
+int	find_octect_line(char **tab, int pos, int **olabel)
+{
+	int	octect = 0;
+	int	i = pos + 1;
+
+	if (tab[1] == NULL)
+		return (0);
+	octect += 2;
+	is_remove_bytecode(tab[pos], &octect);
+	while (i != length_tab(tab)) {
+		if (is_special_case(tab[pos]) == 1)
+			which_arg_is_special(tab[i], &octect);
+		else {
+			which_arg_is(tab[i]) == 1 ? octect += REG_SIZE : 0;
+			which_arg_is(tab[i]) == 2 ? octect += DIR_SIZE : 0;
+			which_arg_is(tab[i]) == 3 ? octect += IND_SIZE : 0;
+		}
+		i++;
+	}
+	return (octect);
+}
 
 void	init_header(char **save, int fd, int size)
 {
@@ -20,13 +39,9 @@ void	init_header(char **save, int fd, int size)
 	memset(&header, 0, sizeof(header_t));
 	header.magic = little_to_big_endian(COREWAR_EXEC_MAGIC);
 	header.prog_size = little_to_big_endian(size);
-//header.magic = my_BIG_ENDIAN(COREWAR_EXEC_MAGIC);
-	//header.magic = be32toh(COREWAR_EXEC_MAGIC);
 	my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 1);
 	while (name[++i])
 		header.prog_name[i] = name[i];
-	//header.prog_size = my_BIG_ENDIAN(size);
-	//header.prog_size = my_BIG_ENDIAN(0);
 	i = -1;
 	my_memset(header.comment, '\0', COMMENT_LENGTH + 1);
 	while (comment[++i])
@@ -44,12 +59,9 @@ int	assembleur(char *file, char **save)
 	int	*olabel = malloc(sizeof(int) * 1);
 	int	k = 0;
 
-	//octect += 8 ? //verifier cas speciaux
-	//olabel[1] = -1;
 	if (fd == -1 || all == NULL)
 		return (84);
 	while (all[++i] != NULL) {
-//		printf("octect ich turn = %d - str = %s\n", octect, all[i][0]);
 		if (is_label_to_save(all[i]) == 1) {
 			olabel[(k++)] = octect;
 			olabel = realloc(olabel, sizeof(int) * (k + 1));
@@ -61,11 +73,7 @@ int	assembleur(char *file, char **save)
 		else
 			octect += find_octect_line(all[i], 0, &olabel);
 	}
-	
 	olabel[k] = -1;
-//	printf("OCTECT FINAL = %d - bigendian = %d\n", octect, be32toh(octect));
-//	print_list(label);
 	init_header(save, fd, octect);
-//	print_int(olabel);
 	write_file(all, label, fd, olabel);
 }

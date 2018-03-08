@@ -31,8 +31,7 @@ int		little_to_big_endian(int nb)
 {
 	int tmp;
 
-	if (is_little() == 1)
-	{
+	if (is_little() == 1) {
 		tmp = nb & 0xffff;
 		nb = (nb & 0xffff0000) / 0xffff;
 		tmp = swap_two_octets(tmp) * 0x10000;

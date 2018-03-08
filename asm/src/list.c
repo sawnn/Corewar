@@ -39,19 +39,6 @@ t_label	*add_link(t_label *head, char *str, int i)
 	}
 }
 
-void	print_list(t_label *head)
-{
-	t_label	*temp = NULL;
-
-	temp = head;
-	while (temp != NULL) {
-		//	printf("label = %s -- octect = %d\n", temp->label_name, temp->octect);
-//my_putstr(temp->label_name, 1);
-		//write(1, "\n", 1);
-		temp = temp->next;
-	}
-}
-
 int	length_list(t_label *head)
 {
 	int	i = 0;

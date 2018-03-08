@@ -84,7 +84,7 @@ void	init_header(char **, int, int);
 
 /*UTILITY_ASSEM.C*/
 char	*take_header_str(char *);
-void	*my_memset(char *, char, int);
+c	*my_memset(char *, char, size_t);
 char	***fill_all_tab(char ***, char **);
 
 /*FILE.C*/

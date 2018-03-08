@@ -7,18 +7,16 @@
 
 #include "../include/my.h"
 
-#define SP SEPARATOR_CHAR
-
-char    *check_comment(char *str)
+char	*check_comment(char *str)
 {
-        int i = -1;
+	int i = -1;
 
-        while (str[++i] != '\0')
-                if (str[i] == '#') {
-                        str[i] = '\0';
-                        return (str);
-	        }
-        return (str);
+	while (str[++i] != '\0')
+		if (str[i] == '#') {
+			str[i] = '\0';
+			return (str);
+		}
+	return (str);
 }
 
 int	calcule(char const *str)
@@ -53,7 +51,6 @@ char	**cut(char *s, char *pick, char **bac, int i)
 		while (o == 1 || (s[k] >= 33 && s[k] <= 126 && s[k] != SP)) {
 			pick[a++] = s[k++];
 			o = s[k] == '"' ? 0 : o;
-			
 		}
 		if ((s[k] < 33 && i != k) || (s[k] == SP && i != k)) {
 			pick[a++] = '\0';

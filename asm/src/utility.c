@@ -53,7 +53,7 @@ char	*my_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-int     my_isnum(char *str)
+int	my_isnum(char *str)
 {
 	int i = 0;
 

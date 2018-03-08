@@ -35,7 +35,7 @@ int	find_label(char *str)
 		return (1);
 	return (0);
 }
-	
+
 int	is_special_case(char *str)
 {
 	char	*sp[7] = {"sti", "ldi", "lldi", "zjmp", "fork", "lfork", NULL};
@@ -53,7 +53,6 @@ int	is_label_to_save(char **tab)
 	int	i = -1;
 
 	while (++i != length_tab(tab)) {
-		//printf("tab[%d][0] = %c - tab[%d][1] = %c\n", i, tab[i][0], i, tab[i][1]);
 		if ((tab[i][0] == DIRECT_CHAR) && (tab[i][1] == LABEL_CHAR)) {
 			return (1);
 		}
@@ -62,26 +61,3 @@ int	is_label_to_save(char **tab)
 	}
 	return (0);
 }
-
-int	find_octect_line(char **tab, int pos, int **olabel)
-{
-	int	octect = 0;
-	int	i = pos + 1;
-	
-	if (tab[1] == NULL) //ou remettre i ?
-		return (0);
-	octect += 2;
-	is_remove_bytecode(tab[pos], &octect);
-	while (i != length_tab(tab)) {
-		if (is_special_case(tab[pos]) == 1)
-			which_arg_is_special(tab[i], &octect);
-		else {
-			which_arg_is(tab[i]) == 1 ? octect += REG_SIZE : 0;
-			which_arg_is(tab[i]) == 2 ? octect += DIR_SIZE : 0;
-			which_arg_is(tab[i]) == 3 ? octect += IND_SIZE : 0;
-		}
-		i++;
-	}
-	return (octect);
-}
-
