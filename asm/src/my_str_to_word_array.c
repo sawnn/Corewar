@@ -23,14 +23,14 @@ int	calcule(char const *str)
 {
 	int i = 1;
 	int k = 0;
-	int o = 0;
+	int check = 0;
 
 	while (str[k] != '\0') {
 		if (str[k] == '"')
-			o++;
-		if (o == 2)
-			o = 0;
-		if (o != 1 && (str[k] < 33 || str[k] > 126 || str[k] == SP)) {
+			check++;
+		if (check == 2)
+			check = 0;
+		if (check != 1 && (str[k] < 33 || str[k] > 126 || str[k] == SP)) {
 			i++;
 		}
 		k++;
@@ -43,14 +43,14 @@ char	**cut(char *s, char *pick, char **bac, int i)
 	int k = -1;
 	int j = 0;
 	int a = 0;
-	int o = 0;
+	int check = 0;
 
 	while (pick && bac && ++k < my_strlen(s)) {
 		i = k;
-		o = s[k] == '"' ? o + 1 : o;
-		while (o == 1 || (s[k] >= 33 && s[k] <= 126 && s[k] != SP)) {
+		check = s[k] == '"' ? check + 1 : check;
+		while (check == 1 || (s[k] >= 33 && s[k] <= 126 && s[k] != SP)) {
 			pick[a++] = s[k++];
-			o = s[k] == '"' ? 0 : o;
+			check = s[k] == '"' ? 0 : check;
 		}
 		if ((s[k] < 33 && i != k) || (s[k] == SP && i != k)) {
 			pick[a++] = '\0';

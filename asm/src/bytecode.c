@@ -11,11 +11,11 @@ int	bin_to_dec(char *bin)
 {
 	int total = 0;
 	int nb = 128;
-	int o = 0;
+	int check = 0;
 
-	while (o < 8) {
-		total = total + (nb * (bin[o] - 48));
-		o++;
+	while (check < 8) {
+		total = total + (nb * (bin[check] - 48));
+		check++;
 		nb /= 2;
 	}
 	return (total);
@@ -24,26 +24,26 @@ int	bin_to_dec(char *bin)
 int	get_bytecode(char **arg, int fd)
 {
 	int  i = -1;
-	int o = 0;
+	int a = 0;
 	int byte = 0;
 	char bytcode[8];
 
 	while (arg[++i] != NULL) {
 		if (arg[i][0] == 'r') {
-			bytcode[o++] = '0';
-			bytcode[o++] = '1';
+			bytcode[a++] = '0';
+			bytcode[a++] = '1';
 		}
 		else if (arg[i][0] == '%') {
-			bytcode[o++] = '1';
-			bytcode[o++] = '0';
+			bytcode[a++] = '1';
+			bytcode[a++] = '0';
 		}
 		else {
-			bytcode[o++] = '1';
-			bytcode[o++] = '1';
+			bytcode[a++] = '1';
+			bytcode[a++] = '1';
 		}
 	}
-	while (o != 8 && (bytcode[o++] = '0'));
-	bytcode[o] = '\0';
+	while (a != 8 && (bytcode[a++] = '0'));
+	bytcode[a] = '\0';
 	byte = bin_to_dec(bytcode);
 	write(fd, &byte, 1);
 
