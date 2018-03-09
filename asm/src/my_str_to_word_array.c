@@ -30,9 +30,8 @@ int	calcule(char const *str)
 			check++;
 		if (check == 2)
 			check = 0;
-		if (check != 1 && (str[k] < 33 || str[k] > 126 || str[k] == SP)) {
+		if (check != 1 && (str[k] < 33 || str[k] > 126 || str[k] == SP))
 			i++;
-		}
 		k++;
 	}
 	return (i);
@@ -43,14 +42,14 @@ char	**cut(char *s, char *pick, char **bac, int i)
 	int k = -1;
 	int j = 0;
 	int a = 0;
-	int check = 0;
+	int chec = 0;
 
 	while (pick && bac && ++k < my_strlen(s)) {
 		i = k;
-		check = s[k] == '"' ? check + 1 : check;
-		while (check == 1 || (s[k] >= 33 && s[k] <= 126 && s[k] != SP)) {
+		chec = s[k] == '"' ? chec + 1 : chec;
+		while (chec == 1 || (s[k] >= 33 && s[k] <= 126 && s[k] != SP)) {
 			pick[a++] = s[k++];
-			check = s[k] == '"' ? 0 : check;
+			chec = s[k] == '"' ? 0 : chec;
 		}
 		if ((s[k] < 33 && i != k) || (s[k] == SP && i != k)) {
 			pick[a++] = '\0';
