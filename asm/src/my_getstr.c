@@ -9,8 +9,8 @@
 
 int	my_nblen(int nb)
 {
-	int	x = 1;
-	int	i = 0;
+	int     x = 1;
+	int     i = 0;
 
 	if (nb < 0)
 		nb = nb * -1;
@@ -45,5 +45,6 @@ char	*my_getstr(int nb)
 		tmp[++i] = (((nb / x) % 10 + 48));
 		x /= 10;
 	}
-	return ((tmp[i + 1] = '\0') && tmp ? tmp : tmp);
+	tmp[i + 1] = '\0';
+	return (tmp);
 }

@@ -13,7 +13,7 @@ int	which_arg_is(char *str)
 		return (1);
 	if (str[0] == DIRECT_CHAR)
 		return (2);
-	if (str[0] == '-' || (str[0] >= '0' && str[0] <= '9') || str[0] == ':')
+	if (str[0] == '-' || (str[0] >= '0' && str[0] <= '9') || str[0] == LABEL_CHAR)
 		return (3);
 	return (0);
 }

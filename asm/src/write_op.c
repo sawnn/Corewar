@@ -15,15 +15,18 @@ int	write_arg(char *arg, int fd, int *octet, char *ope)
 	if (arg[++i] == 'r') {
 		nbr = my_getnbr(&arg[1]);
 		*octet = 1;
-	} else if (arg[i] == '%') {
+	}
+	else if (arg[i] == '%') {
 		nbr = my_getnbr(&arg[1]);
 		*octet = 4;
 		if (is_special_case(ope) == 1) {
 			*octet = 2;
 			nbr = be16toh(nbr);
-		} else
+		}
+		else
 			nbr = be32toh(nbr);
-	} else {
+	}
+	else {
 		nbr = my_getnbr(arg);
 		*octet = 2;
 		nbr = be16toh(nbr);
@@ -76,7 +79,7 @@ char	*index_o(char *str, t_label *label, int *olabel, int j)
 	}
 }
 
-char	***change_label(char ***all, t_label *label, int *olbl)
+char	***change_label(char ***all, t_label *label, int *olabel)
 {
 	int i = -1;
 	int j = 0;
@@ -86,11 +89,11 @@ char	***change_label(char ***all, t_label *label, int *olbl)
 	tmp[1] = '\0';
 	while (all[++i] != NULL) {
 		while (all[i][++j] != NULL) {
-			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == ':')
-				all[i][j] = index_o(all[i][j], label, olbl, j);
+			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR)
+				all[i][j] = index_o(all[i][j], label, olabel, j);
 			else if (all[i][j][0] == LABEL_CHAR) {
 				tmp = my_strcat(tmp, all[i][j]);
-				tmp = index_o(tmp, label, olbl, j);
+				tmp = index_o(tmp, label, olabel, j);
 				all[i][j] = my_strdup(&tmp[1]);
 				tmp[0] = DIRECT_CHAR;
 				tmp[1] = '\0';

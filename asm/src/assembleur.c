@@ -69,7 +69,8 @@ int	assembleur(char *file, char **save)
 		if (find_label(all[i][0]) == 1) {
 			label = add_link(label, all[i][0], octect);
 			octect += find_octect_line(all[i], 1, &olabel);
-		} else
+		}
+		else
 			octect += find_octect_line(all[i], 0, &olabel);
 	}
 	olabel[k] = -1;
