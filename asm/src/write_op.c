@@ -61,7 +61,7 @@ int	write_op(char ***all, int fd, int i, int j)
 	}
 }
 
-char	*index_o(char *str, t_label *label, int *olabel, int j)
+char	*indexo(char *str, t_label *label, int *olabel, int j)
 {
 	int	i = -1;
 	int nbr = 0;
@@ -89,11 +89,11 @@ char	***change_label(char ***all, t_label *label, int *olabel)
 	tmp[1] = '\0';
 	while (all[++i] != NULL) {
 		while (all[i][++j] != NULL) {
-			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == LABEL_CHAR)
-				all[i][j] = index_o(all[i][j], label, olabel, j);
+			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == ':')
+				all[i][j] = indexo(all[i][j], label, olabel, j);
 			else if (all[i][j][0] == LABEL_CHAR) {
 				tmp = my_strcat(tmp, all[i][j]);
-				tmp = index_o(tmp, label, olabel, j);
+				tmp = indexo(tmp, label, olabel, j);
 				all[i][j] = my_strdup(&tmp[1]);
 				tmp[0] = DIRECT_CHAR;
 				tmp[1] = '\0';
