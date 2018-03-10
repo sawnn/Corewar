@@ -36,14 +36,13 @@ void	init_header(char **save, int fd, int size)
 	char	*name = take_header_str(save[0]);
 	char	*comment = take_header_str(save[1]);
 
-	memset(&header, 0, sizeof(header_t));
 	header.magic = little_to_big_endian(COREWAR_EXEC_MAGIC);
 	header.prog_size = little_to_big_endian(size);
-	my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 1);
+	my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 3);
 	while (name[++i])
 		header.prog_name[i] = name[i];
 	i = -1;
-	my_memset(header.comment, '\0', COMMENT_LENGTH + 1);
+	my_memset(header.comment, '\0', COMMENT_LENGTH + 3);
 	while (comment[++i])
 		header.comment[i] = comment[i];
 	write(fd, &header, sizeof(header_t));
