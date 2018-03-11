@@ -11,7 +11,7 @@ void	*check_lab(t_op check, int *i, int j, t_op ope)
 {
 	while (check.label[++(*i)] != NULL)
 		if (*i != j
-		    && my_strcmp(ope.label[j], check.label[*i]) == 0)
+		&& my_strcmp(ope.label[j], check.label[*i]) == 0)
 			return (NULL);
 	*i = -1;
 }
@@ -23,7 +23,7 @@ char	**check_label(char **save, t_op ope, int i, int j)
 	if (save[1] == NULL || save[2] == NULL)
 		return (save);
 	while (ope.label[++j] != NULL) {
-	        if (check_lab(check, &i, j, ope) == NULL)
+		if (check_lab(check, &i, j, ope) == NULL)
 			return (NULL);
 	}
 	j = -1;

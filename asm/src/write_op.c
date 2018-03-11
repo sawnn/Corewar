@@ -54,11 +54,9 @@ void	change_label_bis(int *i, int *j, t_label *lbl, PARAM)
 	char *tmp = NULL;
 
 	if ((tmp = malloc(sizeof(char) * 2)) == NULL)
-		return;;
-	if (tmp == NULL) {
-		tmp[0] = DIRECT_CHAR;
-		tmp[1] = '\0';
-	}
+		return;
+	tmp[0] = DIRECT_CHAR;
+	tmp[1] = '\0';
 	if (all[*i][*j][0] == DIRECT_CHAR && all[*i][*j][1] == ':')
 		all[*i][*j] = indexo(all[*i][*j], lbl, olbl, *j);
 	else if (all[*i][*j][0] == LABEL_CHAR) {
