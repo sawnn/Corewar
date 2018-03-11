@@ -36,8 +36,8 @@ void	init_header(char **save, int fd, int size)
 	char	*name = take_header_str(save[0]);
 	char	*comment = take_header_str(save[1]);
 
-	header.magic = little_to_big_endian(COREWAR_EXEC_MAGIC);
-	header.prog_size = little_to_big_endian(size);
+	header.magic = be32toh(COREWAR_EXEC_MAGIC);
+	header.prog_size = be32toh(size);
 	my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 3);
 	while (name[++i])
 		header.prog_name[i] = name[i];

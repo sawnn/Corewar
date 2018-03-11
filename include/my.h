@@ -10,7 +10,6 @@
 #define READ_SIZE (1)
 #define HELP check_error(&ope, instruc) == 84
 #define FLAGS_OPEN      O_RDWR | O_TRUNC | O_CREAT, 0644
-#define my_BIG_ENDIAN(num) ((num>>24)) | ((num<<8)&0xff0000) | ((num>>8)&0xff00) | ((num<<24)&0xff000000)
 #define PARAM int *olbl, char ***all
 #include <unistd.h>
 #include <stdio.h>
@@ -125,5 +124,4 @@ int	bin_to_dec(char *bin);
 int	get_bytecode(char **arg, int fd);
 int	is_bytecode(char *str);
 
-int	little_to_big_endian(int);
 #endif

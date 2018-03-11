@@ -21,6 +21,14 @@ int	bin_to_dec(char *bin)
 	return (total);
 }
 
+void	write_byte(int a, char bytcode[8], int fd, int byte)
+{
+	while (a != 8 && (bytcode[a++] = '0'));
+	bytcode[a] = '\0';
+	byte = bin_to_dec(bytcode);
+	write(fd, &byte, 1);
+}
+
 int	get_bytecode(char **arg, int fd)
 {
 	int  i = -1;
@@ -32,21 +40,15 @@ int	get_bytecode(char **arg, int fd)
 		if (arg[i][0] == 'r') {
 			bytcode[a++] = '0';
 			bytcode[a++] = '1';
-		}
-		else if (arg[i][0] == '%') {
+		} else if (arg[i][0] == '%') {
 			bytcode[a++] = '1';
 			bytcode[a++] = '0';
-		}
-		else {
+		} else {
 			bytcode[a++] = '1';
 			bytcode[a++] = '1';
 		}
 	}
-	while (a != 8 && (bytcode[a++] = '0'));
-	bytcode[a] = '\0';
-	byte = bin_to_dec(bytcode);
-	write(fd, &byte, 1);
-
+	write_byte(a, bytcode, fd, byte);
 }
 
 int	is_bytecode(char *str)

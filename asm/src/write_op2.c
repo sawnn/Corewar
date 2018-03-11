@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** write op 2 
+** write op 2
 ** File description:
 ** gaspacho andalou
 */
@@ -9,10 +9,10 @@
 
 void	write_op_bis(int *i, int *j, t_op *ope, char ***all)
 {
-	int op = 0;
-	int octet = 1;
-	char *str;
-	int  fd = *j;
+	int	 op = 0;
+	int	octet = 1;
+	char	*str;
+	int	fd = *j;
 
 	*j = -1;
 	*j = all[*i][0][my_strlen(all[*i][0]) - 1] == LABEL_CHAR ? 0 : *j;
@@ -32,12 +32,12 @@ void	write_op_bis(int *i, int *j, t_op *ope, char ***all)
 
 int	write_op(char ***all, int fd, int i, int j)
 {
-	t_op ope;
-	
+	t_op	ope;
+
 	if (init_struct(&ope) == 84)
 		return (84);
 	while (all[++i] != NULL) {
 		j = fd;
 		write_op_bis(&i, &j, &ope, all);
-        }
+	}
 }

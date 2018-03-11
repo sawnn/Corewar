@@ -23,8 +23,7 @@ SRC	=	asm/src/main.c			\
 		asm/src/write_op.c		\
 		asm/src/write_op2.c		\
 		asm/src/my_getstr.c		\
-		asm/src/bytecode.c		\
-		asm/src/convert_endian.c
+		asm/src/bytecode.c		
 
 OBJ	=	$(SRC:.c=.o)
 

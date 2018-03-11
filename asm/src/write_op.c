@@ -68,7 +68,6 @@ void	change_label_bis(int *i, int *j, t_label *lbl, PARAM)
 		tmp[0] = DIRECT_CHAR;
 		tmp[1] = '\0';
 	}
-	
 }
 
 char	***change_label(char ***all, t_label *label, int *olabel)
