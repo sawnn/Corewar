@@ -15,50 +15,20 @@ int	write_arg(char *arg, int fd, int *octet, char *ope)
 	if (arg[++i] == 'r') {
 		nbr = my_getnbr(&arg[1]);
 		*octet = 1;
-	}
-	else if (arg[i] == '%') {
+	} else if (arg[i] == '%') {
 		nbr = my_getnbr(&arg[1]);
 		*octet = 4;
 		if (is_special_case(ope) == 1) {
 			*octet = 2;
 			nbr = be16toh(nbr);
-		}
-		else
+		} else
 			nbr = be32toh(nbr);
-	}
-	else {
+	} else {
 		nbr = my_getnbr(arg);
 		*octet = 2;
 		nbr = be16toh(nbr);
 	}
 	return (nbr);
-}
-
-int	write_op(char ***all, int fd, int i, int j)
-{
-	t_op ope;
-	int op = 0;
-	int octet = 1;
-	char *str;
-
-	if (init_struct(&ope) == 84)
-		return (84);
-	while (all[++i] != NULL) {
-		j = all[i][0][my_strlen(all[i][0]) - 1] == LABEL_CHAR ? 0 : j;
-		if (all[i][j + 1] != NULL) {
-			op = send_op(ope, &all[i][++j]);
-			str = my_strdup(all[i][j]);
-			write(fd, &op, octet);
-			if (is_bytecode(all[i][j]) == 0)
-				get_bytecode(&all[i][j + 1], fd);
-		}
-		while (all[i][++j] != NULL) {
-			op = write_arg(all[i][j], fd, &octet, str);
-			write(fd, &op, octet);
-		}
-		octet = 1;
-		j = -1;
-	}
 }
 
 char	*indexo(char *str, t_label *label, int *olabel, int j)
@@ -79,25 +49,36 @@ char	*indexo(char *str, t_label *label, int *olabel, int j)
 	}
 }
 
+void	change_label_bis(int *i, int *j, t_label *lbl, PARAM)
+{
+	char *tmp = NULL;
+
+	if ((tmp = malloc(sizeof(char) * 2)) == NULL)
+		return;;
+	if (tmp == NULL) {
+		tmp[0] = DIRECT_CHAR;
+		tmp[1] = '\0';
+	}
+	if (all[*i][*j][0] == DIRECT_CHAR && all[*i][*j][1] == ':')
+		all[*i][*j] = indexo(all[*i][*j], lbl, olbl, *j);
+	else if (all[*i][*j][0] == LABEL_CHAR) {
+		tmp = my_strcat(tmp, all[*i][*j]);
+		tmp = indexo(tmp, lbl, olbl, *j);
+		all[*i][*j] = my_strdup(&tmp[1]);
+		tmp[0] = DIRECT_CHAR;
+		tmp[1] = '\0';
+	}
+	
+}
+
 char	***change_label(char ***all, t_label *label, int *olabel)
 {
 	int i = -1;
 	int j = 0;
-	char *tmp = malloc(sizeof(char) * 2);
 
-	tmp[0] = DIRECT_CHAR;
-	tmp[1] = '\0';
 	while (all[++i] != NULL) {
 		while (all[i][++j] != NULL) {
-			if (all[i][j][0] == DIRECT_CHAR && all[i][j][1] == ':')
-				all[i][j] = indexo(all[i][j], label, olabel, j);
-			else if (all[i][j][0] == LABEL_CHAR) {
-				tmp = my_strcat(tmp, all[i][j]);
-				tmp = indexo(tmp, label, olabel, j);
-				all[i][j] = my_strdup(&tmp[1]);
-				tmp[0] = DIRECT_CHAR;
-				tmp[1] = '\0';
-			}
+			change_label_bis(&i, &j, label, olabel, all);
 		}
 		j = -1;
 	}

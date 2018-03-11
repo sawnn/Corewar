@@ -11,6 +11,7 @@
 #define HELP check_error(&ope, instruc) == 84
 #define FLAGS_OPEN      O_RDWR | O_TRUNC | O_CREAT, 0644
 #define my_BIG_ENDIAN(num) ((num>>24)) | ((num<<8)&0xff0000) | ((num>>8)&0xff00) | ((num<<24)&0xff000000)
+#define PARAM int *olbl, char ***all
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -108,8 +109,13 @@ int	length_list(t_label *);
 int	delete_t_label(t_label **, int);
 
 /*WRITE_OP.C*/
-int	write_op(char ***, int, int, int);
+int	write_arg(char *, int , int *, char *);
 int	write_file(char ***, t_label*, int, int *);
+
+/*WRITE_OP2.C*/
+void	write_op_bis(int *, int *, t_op *, char ***);
+int	write_op(char ***, int, int, int);
+
 
 /*MY_GETSTR.C*/
 char	*my_getstr(int);
