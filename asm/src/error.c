@@ -15,8 +15,7 @@ int	check_name(t_op *ope, char **instruct, int bool, int i)
 	ope->label = j == -1 ? malloc(sizeof(char*) * a) : ope->label;
 	if (instruct[0][my_strlen(instruct[0]) - 1] == LABEL_CHAR) {
 		ope->label = realloc(ope->label, sizeof(char *) * a++);
-		ope->label[++j] = malloc(sizeof(char) * my_strlen(instruct[0]));
-		if (ope->label[j] == NULL)
+		if ((ope->label[++j] = malloc(my_strlen(instruct[0]))) == NULL)
 			return (84);
 		ope->label[j][0] = '\0';
 		ope->label[j] = my_strdup(instruct[0]);
@@ -31,7 +30,6 @@ int	check_name(t_op *ope, char **instruct, int bool, int i)
 			return (i);
 	return (84);
 }
-
 
 int	put_label(t_op *ope, char *param, int nbr, int a)
 {

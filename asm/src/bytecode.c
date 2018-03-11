@@ -51,8 +51,8 @@ int	get_bytecode(char **arg, int fd)
 
 int	is_bytecode(char *str)
 {
-	char    *sp[5] = {"live", "fork", "lfork", "zjmp", NULL};
-	int     i = -1;
+	char	*sp[5] = {"live", "fork", "lfork", "zjmp", NULL};
+	int	i = -1;
 
 	while (++i != length_tab(sp)) {
 		if (my_strcmp(sp[i], str) == 0)

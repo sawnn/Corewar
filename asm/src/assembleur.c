@@ -48,18 +48,14 @@ void	init_header(char **save, int fd, int size)
 	write(fd, &header, sizeof(header_t));
 }
 
-int	assembleur(char *file, char **save)
+int	assembleur(char **save, char ***all, int fd)
 {
-	int	fd = open(my_strcat(find_file_name(file), ".cor"), FLAGS_OPEN);
 	int	i = -1;
-	char	***all = fill_all_tab(all, save);
 	int	octect = 0;
 	t_label	*label = NULL;
 	int	*olabel = malloc(sizeof(int) * 1);
 	int	k = 0;
 
-	if (fd == -1 || all == NULL)
-		return (84);
 	while (all[++i] != NULL) {
 		if (is_label_to_save(all[i]) == 1) {
 			olabel[(k++)] = octect;
@@ -68,8 +64,7 @@ int	assembleur(char *file, char **save)
 		if (find_label(all[i][0]) == 1) {
 			label = add_link(label, all[i][0], octect);
 			octect += find_octect_line(all[i], 1, &olabel);
-		}
-		else
+		} else
 			octect += find_octect_line(all[i], 0, &olabel);
 	}
 	olabel[k] = -1;

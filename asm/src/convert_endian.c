@@ -27,7 +27,7 @@ static int	swap_two_octets(int nb)
 	return (nb);
 }
 
-int		little_to_big_endian(int nb)
+int	little_to_big_endian(int nb)
 {
 	int tmp;
 

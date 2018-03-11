@@ -18,7 +18,6 @@
 #include <string.h>
 #include "op.h"
 #define SP SEPARATOR_CHAR
-//#define	PARAM int save, int j
 typedef	struct	s_op {
 	char	**arg;
 	int	*ac;
@@ -79,7 +78,7 @@ int	my_getnbr(char *str);
 char	*my_putnbr_base(unsigned int nbr, char *base);
 
 /*ASSEMBLEUR.C*/
-int	assembleur(char *, char **);
+int	assembleur(char **, char ***, int);
 void	init_header(char **, int, int);
 
 /*UTILITY_ASSEM.C*/
