@@ -124,4 +124,8 @@ int	bin_to_dec(char *bin);
 int	get_bytecode(char **arg, int fd);
 int	is_bytecode(char *str);
 
+/*CHECK_LABEL.C*/
+void	*check_lab(t_op, int *, int, t_op);
+char	**check_label(char **, t_op, int, int);
+
 #endif
